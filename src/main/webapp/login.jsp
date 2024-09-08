@@ -22,16 +22,18 @@
 		</header>
 
 		<div class="content">
-			<div>
-				<h1>Welcome to Restaurant Online Ordering System</h1>
-			</div>
 			<div id="center">
                 <form>
+                    <h1>Login</h1>
                     <label for="uname"><b>Username</b></label>
                     <input type="text" placeholder="Enter Username" name="uname" required>
                     <label for="psw"><b>Password</b></label>
                     <input type="password" placeholder="Enter Password" name="psw" required>
                     <button type="submit">Login</button>
+                    <div class="container">
+                        <a class="cancelbtn" href="index.jsp">Cancel</a>
+                        <span>Dont have an <a href=".">account?</a></span>
+                    </div>
                 </form>
             </div>
 		</div>
