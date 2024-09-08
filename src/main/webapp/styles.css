@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #ececec;
+    font-family: "Roboto", sans-serif;
+}
+
+h1 {
+    margin: 0;
+    padding: 0.67em;
+    font-size: 3em;
+}
+
+header {
+    display: flex;
+    background-color: #142d4c;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    position: fixed;
+    right: 0;
+    left: 0;
+    box-shadow: 0 0.3em #385170;
+}
+
+header ul {
+    display: flex;
+    list-style-type: none;
+}
+
+header li {
+    padding: 0 1em;
+}
+
+header a {
+    text-decoration: none;
+    background-color: #385170;
+    color: white;
+    padding: 1em 1.5em;
+    width: 4vw;
+    height: 2em;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 1em;
+    display: flex;
+}
+
+header a.active {
+    background-color: #f44336;
+}
+
+header a:hover, a:active {
+    background-color: #9fd3c7;
+}
+
+header a:hover.active, a:active.active {
+    background-color: red;
+}
+
+.content {
+    margin: 5% 0 0 0;
+    /* For testing scrolling */
+    min-height: 200vh;
+}
+
+footer {
+    background-color: #142d4c;
+    color: white;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+footer ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+footer li {
+    padding: 0 1em;
+}
+
+footer a {
+    color: #a2a8d3;
+}
