@@ -1,21 +1,21 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-<!DOCTYPE html>
-<html lang="en">
+	<!DOCTYPE html>
+	<html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        <title>Restaurant | Home</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+		<title>Restaurant | Home</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
 
-    <body>
-		<jsp:include page="/ConnServlet"/>
+	<body>
+		<jsp:include page="/ConnServlet" />
 
 		<header>
 			<div>
-			  <img src="" alt="Logo">
+				<img src="" alt="Logo">
 			</div>
 			<ul>
 				<li><a class="active" href="homedirect.jsp">Home</a></li>
@@ -48,4 +48,4 @@
 		</footer>
 	</body>
 
-</html>
+	</html>
