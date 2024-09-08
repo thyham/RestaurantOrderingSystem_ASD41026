@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.uts.restaurant.model.User"%>
+<%@page import="com.uts.restaurant.model.dao.DBManager"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +11,14 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+
+        <%
+            DBManager manager = (DBManager) request.getSession().getAttribute("manager");
+            if(manager == null){
+                response.sendRedirect("index.jsp");
+            }
+        %>  
+
 		<header>
 			<div>
 			  <img src="" alt="Logo">
@@ -23,12 +33,12 @@
 
 		<div class="content">
 			<div id="center">
-                <form>
+                <form action="login", method="post">
                     <h1>Login</h1>
-                    <label for="uname"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="uname" required>
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" placeholder="Enter email" name="email" required>
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" required>
                     <button type="submit">Login</button>
                     <div class="container">
                         <a class="cancelbtn" href="index.jsp">Cancel</a>
