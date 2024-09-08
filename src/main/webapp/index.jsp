@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-	
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -18,7 +18,7 @@
 			  <img src="" alt="Logo">
 			</div>
 			<ul>
-				<li><a class="active" href=".">Home</a></li>
+				<li><a class="active" href="homedirect.jsp">Home</a></li>
 				<li><a href=".">Menu</a></li>
 				<li><a href=".">About</a></li>
 				<li><a href=".">Contact</a></li>
@@ -39,7 +39,7 @@
 
 		<footer>
 			<ul>
-				<li><a href=".">Home</a></li>
+				<li><a href="homedirect.jsp">Home</a></li>
 				<li><a href=".">Menu</a></li>
 				<li><a href=".">About</a></li>
 				<li><a href=".">Contact</a></li>

@@ -14,7 +14,7 @@
 			  <img src="" alt="Logo">
 			</div>
 			<ul>
-				<li><a class="active" href=".">Home</a></li>
+				<li><a class="active" href="homedirect.jsp">Home</a></li>
 				<li><a href=".">Menu</a></li>
 				<li><a href=".">About</a></li>
 				<li><a href=".">Contact</a></li>
@@ -27,15 +27,15 @@
 			</div>
 			<div>
 				<ul>
-					<li><a href="login.jsp">Login</a></li>
-					<li><a href=".">Sign Up</a></li>
+					<li><a href="login.jsp">View Users</a></li>
+					<li><a href="logout">Logout</a></li>
 				</ul>
 			</div>
 		</div>
 
 		<footer>
 			<ul>
-				<li><a href=".">Home</a></li>
+				<li><a href="homedirect.jsp">Home</a></li>
 				<li><a href=".">Menu</a></li>
 				<li><a href=".">About</a></li>
 				<li><a href=".">Contact</a></li>

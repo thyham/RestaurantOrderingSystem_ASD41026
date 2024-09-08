@@ -24,7 +24,7 @@
 			  <img src="" alt="Logo">
 			</div>
 			<ul>
-				<li><a href="index.jsp">Home</a></li>
+				<li><a href="homedirect.jsp">Home</a></li>
 				<li><a href=".">Menu</a></li>
 				<li><a href=".">About</a></li>
 				<li><a href=".">Contact</a></li>
@@ -50,7 +50,7 @@
 
 		<footer>
 			<ul>
-				<li><a href="index.jsp">Home</a></li>
+				<li><a href="homedirect.jsp">Home</a></li>
 				<li><a href=".">Menu</a></li>
 				<li><a href=".">About</a></li>
 				<li><a href=".">Contact</a></li>
