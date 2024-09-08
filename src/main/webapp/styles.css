@@ -65,6 +65,7 @@ header a:hover.active, a:active.active {
     margin: 5% 0 0 0;
     /* For testing scrolling */
     min-height: 200vh;
+    padding: 16px;
 }
 
 footer {
@@ -89,4 +90,24 @@ footer li {
 
 footer a {
     color: #a2a8d3;
+}
+
+form {
+    border: 3px solid white;
+    background-color: #ccc;
+    padding: 20px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid gray;
+    box-sizing: border-box;
+}
+
+#center {
+  display: flex;
+  justify-content: center;
 }
