@@ -31,11 +31,9 @@
 					<li><a href=".">Sign Up</a></li>
 				</ul>
 			</div>
-			<br><br><br>
 		</div>
 
 		<footer>
-			<br>
 			<ul>
 				<li><a href=".">Home</a></li>
 				<li><a href=".">Menu</a></li>
