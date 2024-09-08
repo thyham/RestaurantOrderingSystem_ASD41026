@@ -11,6 +11,7 @@ h1 {
     margin: 0;
     padding: 0.67em;
     font-size: 3em;
+    text-align: center;
 }
 
 header {
@@ -44,7 +45,6 @@ header a {
     height: 2em;
     justify-content: center;
     align-items: center;
-    text-decoration: none;
     border-radius: 1em;
     display: flex;
 }
@@ -62,10 +62,45 @@ header a:hover.active, a:active.active {
 }
 
 .content {
-    margin: 5% 0 0 0;
+    display: flex;
+    flex-direction: column;
+    margin: 10% 10% 5% 10%;
+    padding: 0 0 2% 0;
+    border: 3px solid white;
+    background-color: #f1f1f1;
+    box-shadow: 2px 2px grey;
+  
     /* For testing scrolling */
-    min-height: 200vh;
-    padding: 16px;
+    min-height: 0;
+}
+
+.dashboard ul {
+    padding: 0 0 3% 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.dashboard li {
+    padding: 20px;
+}
+
+.dashboard a {
+    text-decoration: none;
+    color: black;
+    padding: 1em 1.5em;
+    width: 10vw;
+    height: 3em;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+    display: flex;
+    border: 3px solid #a2a8d3;
+}
+
+.dashboard a:hover {
+    border: 3px solid #385170;
 }
 
 footer {
@@ -93,14 +128,14 @@ footer a {
 }
 
 form {
-    margin: 2em 0 0 0;
+    margin: 10% 0 0 0;
     border: 3px solid white;
     background-color: #f1f1f1;
     padding: 20px;
+    box-shadow: 2px 2px grey;
 }
 
 form h1 {
-    text-align: center;
     padding: 0 0 1em 0;
 }
 
@@ -145,6 +180,19 @@ input[type=text], input[type=password] {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+}
+
+.logoutbtn {
+    text-decoration: none;
+    background-color: #385170;
+    color: white;
+    padding: 1em 1.5em;
+    width: 4vw;
+    height: 2em;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+    display: flex;
 }
 
 #center {

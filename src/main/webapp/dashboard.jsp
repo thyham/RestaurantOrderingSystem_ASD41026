@@ -25,12 +25,17 @@
 			<div>
 				<h1>Dashboard</h1>
 			</div>
-			<div>
+			<div class="dashboard">
 				<ul>
-					<li><a href="login.jsp">View Users</a></li>
-					<li><a href="logout">Logout</a></li>
+					<li><a href=".">View Users</a></li>
+					<li><a href=".">View Access Logs</a></li>
+                    <li><a href=".">View Product Logs</a></li>
+					<li><a href=".">View Order Logs</a></li>
 				</ul>
 			</div>
+            <div id="center">
+                <a href="logout" class="logoutbtn">Logout</a>
+            </div>
 		</div>
 
 		<footer>

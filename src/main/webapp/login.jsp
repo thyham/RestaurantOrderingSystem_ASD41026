@@ -31,7 +31,7 @@
 			</ul>
 		</header>
 
-		<div class="content">
+		<div>
 			<div id="center">
                 <form action="login", method="post">
                     <h1>Login</h1>

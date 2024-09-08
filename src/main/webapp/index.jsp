@@ -27,9 +27,9 @@
 
 		<div class="content">
 			<div>
-				<h1>Welcome to Restaurant Online Ordering System</h1>
+				<h1>Welcome to the Restaurant Online Ordering System!</h1>
 			</div>
-			<div>
+			<div class="dashboard">
 				<ul>
 					<li><a href="login.jsp">Login</a></li>
 					<li><a href=".">Sign Up</a></li>
