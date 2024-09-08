@@ -35,6 +35,14 @@ public class User implements Serializable {
         isActive = true;
     }
 
+    public User(String email) {
+        this.fname = email;
+        this.surname = "";
+        this.email = email;
+        this.phoneNo = "";
+        isActive = true;
+    }
+
     public int getID() {
         return id;
     }
