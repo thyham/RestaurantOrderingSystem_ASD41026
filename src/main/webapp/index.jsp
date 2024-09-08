@@ -42,7 +42,7 @@
 				<li><a href=".">About</a></li>
 				<li><a href=".">Contact</a></li>
 			</ul>
-			<p>By Group # | University of Technology | Spring 2024</p>
+			<p>By Group 6 | University of Technology | Spring 2024</p>
 		</footer>
 	</body>
 </html>
