@@ -76,7 +76,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><a href="."><button class="submit-btn3">Add</button></a></td>
+                <td><a href="."><button>Add</button></a></td>
             </tr>
         </table>
     </div>
