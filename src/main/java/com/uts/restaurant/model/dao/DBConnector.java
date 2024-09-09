@@ -10,7 +10,7 @@ public class DBConnector {
 
     public DBConnector() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/iotbay", "root", "iotbay");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurant", "root", "restaurant");
     }
 
     public Connection openConnection(){
