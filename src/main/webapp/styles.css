@@ -69,6 +69,7 @@ header a:hover.active, a:active.active {
     border: 3px solid white;
     background-color: #f1f1f1;
     box-shadow: 2px 2px grey;
+    align-items: center;
   
     /* For testing scrolling */
     min-height: 0;
@@ -171,6 +172,26 @@ form a.cancelbtn {
 
 form .container {
     padding-top: 16px;
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid lightgray;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #ddd;}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
 }
 
 input[type=text], input[type=password] {

@@ -29,6 +29,7 @@
 			<div>
 				<h1>Welcome to the Restaurant Online Ordering System!</h1>
 			</div>
+			<img src="" alt="Food" style="width:50vw;height:50vh;">
 			<div class="dashboard">
 				<ul>
 					<li><a href="login.jsp">Login</a></li>
