@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        <title>Restaurant | Home</title>
+        <title>Restaurant | Dashboard</title>
         <link rel="stylesheet" href="styles.css">
     </head>
 
@@ -29,7 +29,7 @@
             </div>
             <div class="dashboard">
                 <ul>
-                    <li><a href=".">View Users</a></li>
+                    <li><a href="viewusers.jsp">View Users</a></li>
                     <li><a href=".">View Access Logs</a></li>
                     <li><a href=".">View Product Logs</a></li>
                     <li><a href=".">View Order Logs</a></li>
