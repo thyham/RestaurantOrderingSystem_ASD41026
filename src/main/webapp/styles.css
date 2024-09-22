@@ -7,6 +7,10 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
+button:hover, a:hover{
+    opacity: 0.8;
+}
+
 h1 {
     margin: 0;
     padding: 0.67em;
@@ -53,11 +57,13 @@ header a.active {
     background-color: #f44336;
 }
 
-header a:hover, a:active {
+header a:hover,
+a:active {
     background-color: #9fd3c7;
 }
 
-header a:hover.active, a:active.active {
+header a:hover.active,
+a:active.active {
     background-color: red;
 }
 
@@ -70,7 +76,7 @@ header a:hover.active, a:active.active {
     background-color: #f1f1f1;
     box-shadow: 2px 2px grey;
     align-items: center;
-  
+
     /* For testing scrolling */
     min-height: 0;
 }
@@ -128,7 +134,7 @@ footer a {
     color: #a2a8d3;
 }
 
-form {
+.form {
     margin: 10% 0 0 0;
     border: 3px solid white;
     background-color: #f1f1f1;
@@ -136,11 +142,11 @@ form {
     box-shadow: 2px 2px grey;
 }
 
-form h1 {
+.form h1 {
     padding: 0 0 1em 0;
 }
 
-form button {
+.form button {
     font-size: 1.2em;
     background-color: #04AA6D;
     color: white;
@@ -151,26 +157,22 @@ form button {
     width: 100%;
 }
 
-form button:hover, a:hover {
-    opacity: 0.8;
-}
-
-form span {
+.form span {
     float: right;
 }
 
-form .cancelbtn {
+.form .cancelbtn {
     width: auto;
     padding: 10px 18px;
     background-color: #f44336;
 }
 
-form a.cancelbtn {
+.form a.cancelbtn {
     text-decoration: none;
     color: white;
 }
 
-form .container {
+.form .container {
     padding-top: 16px;
 }
 
@@ -179,12 +181,15 @@ table {
     border-collapse: collapse;
 }
 
-td, th {
+td,
+th {
     border: 1px solid lightgray;
     padding: 8px;
 }
 
-tr:nth-child(even){background-color: #ddd;}
+tr:nth-child(even) {
+    background-color: #ddd;
+}
 
 th {
     padding-top: 12px;
@@ -194,7 +199,8 @@ th {
     color: white;
 }
 
-input[type=text], input[type=password] {
+input[type=text],
+input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -219,4 +225,22 @@ input[type=text], input[type=password] {
 #center {
     display: flex;
     justify-content: center;
+}
+
+.search {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    padding: 0 0 20px 0;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.search button {
+    height: 3em;
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
