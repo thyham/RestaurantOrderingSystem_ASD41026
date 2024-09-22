@@ -25,6 +25,39 @@ public class DBManager {
         return (rs.next());
     }
 
+    private void addUser(String email, String password, String fname, String surname, String phoneNo) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO Users (email, password, fname, surname, phoneNo, isactive) VALUES (?, ?, ?, ?, ?, ?)");
+        ps.setString(1, email);
+        ps.setString(2, password);
+        ps.setString(3, fname);
+        ps.setString(4, surname);
+        ps.setString(5, phoneNo);
+        ps.setInt(6, (int)1);
+        ps.executeUpdate();
+    }
+
+    public void addCustomer(String email, String password, String fname, String surname, String phoneNo) throws SQLException {   
+        addUser(email, password, fname, surname, phoneNo);
+        ResultSet rs = conn.prepareStatement("select LAST_INSERT_ID()").executeQuery();
+        if (rs.next()) {
+            int id = rs.getInt(1);
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO Customers (customer_id) VALUES (?)");
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        }
+    }
+
+    public void addStaff(String email, String password, String fname, String surname, String phoneNo) throws SQLException {   
+        addUser(email, password, fname, surname, phoneNo);
+        ResultSet rs = conn.prepareStatement("select LAST_INSERT_ID()").executeQuery();
+        if (rs.next()) {
+            int id = rs.getInt(1);
+            PreparedStatement ps2 = conn.prepareStatement("INSERT INTO Staff (staff_id) VALUES (?)");
+            ps2.setInt(1, id);
+            ps2.executeUpdate();
+        }
+    }
+
     public Users getUsers() throws SQLException {
         ArrayList<User> users = new ArrayList<User>();
         ResultSet rs = conn.prepareStatement("SELECT * FROM Users").executeQuery();
