@@ -1,3 +1,4 @@
 This repository is for Group 6's Restaurant Ordering System
 
-MySQL tables are in db folder
+Make sure the MySQL schema is called 'restaurant'.
+MySQL tables are in db folder.
