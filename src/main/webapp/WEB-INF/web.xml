@@ -36,4 +36,12 @@
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>View-Users</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.ViewUsersServlet</servlet-class>
+     </servlet>
+    <servlet-mapping>
+        <servlet-name>View-Users</servlet-name>
+        <url-pattern>/view-users</url-pattern>
+    </servlet-mapping>
 </web-app>

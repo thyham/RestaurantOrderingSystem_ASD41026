@@ -1,16 +1,27 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
+<%@page import="com.uts.restaurant.model.Users"%>
+<%@page import="com.uts.restaurant.model.User"%>
+<%@page import="com.uts.restaurant.model.Customer"%>
+<%@page import="java.io.IOException"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Restaurant | Home</title>
+    <title>Restaurant | View Users</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+
+    <%
+        Users users = (Users)request.getSession().getAttribute("users");
+    %>
+
     <header>
         <div>
             <img src="" alt="Logo">
@@ -37,38 +48,44 @@
                 <th>Status</th>
                 <th></th>
             </tr>
+            <% 
+                int i = 0;
+                for (User user : users.getUsers()) {
+                    int id = user.getID();
+                    String email = user.getEmail();
+                    String phoneNo = user.getPhoneNo();
+                    String type = "";
+                    String status = "";
+                    if (user instanceof Customer) {
+                        type = "Customer";
+                    }
+                    else {
+                        type = "Staff";
+                    }
+                    if (user.isActive()) {
+                        status = "Active";
+                    }
+                    else {
+                        status = "Inactive";
+                    }
+            %>
             <tr>
                 <form action="." , method="post">
                     <input type="hidden" name="id">
                     <td><button>x</button></td>
                 </form>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><%= id%></td>
+                <td><%= email%></td>
+                <td><%= phoneNo%></td>
+                <td><%= type%></td>
+                <td><%= status%></td>
                 <form action="." , method="post">
                     <input type="hidden" name="id">
                     <input type="hidden" name="type">
                     <td><button onclick="">View</button></td>
                 </form>
             </tr>
-            <tr>
-                <form action="." , method="post">
-                    <input type="hidden" name="id">
-                    <td><button>x</button></td>
-                </form>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <form action="." , method="post">
-                    <input type="hidden" name="id">
-                    <input type="hidden" name="type">
-                    <td><button onclick="">View</button></td>
-                </form>
-            </tr>
+            <% i++; }%>
             <tr>
                 <td></td>
                 <td></td>
