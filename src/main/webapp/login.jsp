@@ -35,7 +35,7 @@
 
         <div>
             <div id="center">
-                <form action="login" , method="post">
+                <form action="login" , method="post" class="form">
                     <h1>Login</h1>
                     <label for="email"><b>Email</b></label>
                     <input type="text" placeholder="Enter email" name="email" required>

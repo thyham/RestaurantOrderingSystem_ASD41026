@@ -27,7 +27,7 @@
             <img src="" alt="Logo">
         </div>
         <ul>
-            <li><a class="active" href="homedirect.jsp">Home</a></li>
+            <li><a href="homedirect.jsp">Home</a></li>
             <li><a href=".">Menu</a></li>
             <li><a href=".">About</a></li>
             <li><a href=".">Contact</a></li>
@@ -38,64 +38,71 @@
         <div>
             <h1>Viewing Users</h1>
         </div>
-        <table>
-            <tr>
-                <th></th>
-                <th>ID</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>User Type</th>
-                <th>Status</th>
-                <th></th>
-            </tr>
-            <% 
-                int i = 0;
-                for (User user : users.getUsers()) {
-                    int id = user.getID();
-                    String email = user.getEmail();
-                    String phoneNo = user.getPhoneNo();
-                    String type = "";
-                    String status = "";
-                    if (user instanceof Customer) {
-                        type = "Customer";
-                    }
-                    else {
-                        type = "Staff";
-                    }
-                    if (user.isActive()) {
-                        status = "Active";
-                    }
-                    else {
-                        status = "Inactive";
-                    }
-            %>
-            <tr>
-                <form action="." , method="post">
-                    <input type="hidden" name="id">
-                    <td><button>x</button></td>
-                </form>
-                <td><%= id%></td>
-                <td><%= email%></td>
-                <td><%= phoneNo%></td>
-                <td><%= type%></td>
-                <td><%= status%></td>
-                <form action="." , method="post">
-                    <input type="hidden" name="id">
-                    <input type="hidden" name="type">
-                    <td><button onclick="">View</button></td>
-                </form>
-            </tr>
-            <% i++; }%>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><a href="."><button>Add</button></a></td>
-            </tr>
-        </table>
+        <div>
+            <form action="", method="post" class="search">
+                <input type="text" id="emailFilter" name="emailFilter" value="" placeholder="Filter by email...">
+                <input type="text" id="phoneNoFilter" name="phoneNoFilter" value="" placeholder="Filter by phone number...">
+                <button type="submit">Search</button>
+            </form>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>User Type</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+                <% 
+                    int i = 0;
+                    for (User user : users.getUsers()) {
+                        int id = user.getID();
+                        String email = user.getEmail();
+                        String phoneNo = user.getPhoneNo();
+                        String type = "";
+                        String status = "";
+                        if (user instanceof Customer) {
+                            type = "Customer";
+                        }
+                        else {
+                            type = "Staff";
+                        }
+                        if (user.isActive()) {
+                            status = "Active";
+                        }
+                        else {
+                            status = "Inactive";
+                        }
+                %>
+                <tr>
+                    <form action="." , method="post">
+                        <input type="hidden" name="id">
+                        <td><button>x</button></td>
+                    </form>
+                    <td><%= id%></td>
+                    <td><%= email%></td>
+                    <td><%= phoneNo%></td>
+                    <td><%= type%></td>
+                    <td><%= status%></td>
+                    <form action="." , method="post">
+                        <input type="hidden" name="id">
+                        <input type="hidden" name="type">
+                        <td><button onclick="">View</button></td>
+                    </form>
+                </tr>
+                <% i++; }%>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="."><button>Add</button></a></td>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <footer>
