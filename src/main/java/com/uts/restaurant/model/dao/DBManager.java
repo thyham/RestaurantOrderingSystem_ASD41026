@@ -58,6 +58,27 @@ public class DBManager {
         }
     }
 
+    public User getUser(int id) throws SQLException { 
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE user_id=?");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            String email = rs.getString("email");
+            String fname = rs.getString("fname");
+            String surname = rs.getString("surname");
+            String phoneNo = rs.getString("phoneno");
+            Boolean isActive = rs.getBoolean("isactive");
+            if (checkCustomer(id)) {
+                return new Customer(id, fname, surname, email, phoneNo, isActive);
+            }
+            else {
+                return new Staff(id, fname, surname, email, phoneNo, isActive);
+            }
+        }
+        return null;
+    }
+
     public Users getUsers() throws SQLException {
         ArrayList<User> users = new ArrayList<User>();
         ResultSet rs = conn.prepareStatement("SELECT * FROM Users").executeQuery();

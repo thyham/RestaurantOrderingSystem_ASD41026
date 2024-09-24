@@ -26,9 +26,7 @@
 		</header>
 
 		<div class="content">
-			<div>
-				<h1>Welcome to the Restaurant Online Ordering System!</h1>
-			</div>
+			<h1>Welcome to the Restaurant Online Ordering System!</h1>
 			<img src="" alt="Food" style="width:50vw;height:50vh;">
 			<div class="dashboard">
 				<ul>

@@ -39,7 +39,7 @@
             <h1>Viewing Users</h1>
         </div>
         <div>
-            <form action="", method="post" class="search">
+            <form action="index.jsp", method="post" class="search">
                 <input type="text" id="emailFilter" name="emailFilter" value="" placeholder="Filter by email...">
                 <input type="text" id="phoneNoFilter" name="phoneNoFilter" value="" placeholder="Filter by phone number...">
                 <button type="submit">Search</button>
@@ -76,7 +76,7 @@
                         }
                 %>
                 <tr>
-                    <form action="." , method="post">
+                    <form action="index.jsp", method="post">
                         <input type="hidden" name="id">
                         <td><button>x</button></td>
                     </form>
@@ -85,10 +85,10 @@
                     <td><%= phoneNo%></td>
                     <td><%= type%></td>
                     <td><%= status%></td>
-                    <form action="." , method="post">
-                        <input type="hidden" name="id">
-                        <input type="hidden" name="type">
-                        <td><button onclick="">View</button></td>
+                    <form action="view-user", method="post">
+                        <input type="hidden" name="id" value="<%= id%>">
+                        <input type="hidden" name="type" value="<%= type%>">
+                        <td><button>View</button></td>
                     </form>
                 </tr>
                 <% i++; }%>
@@ -103,6 +103,7 @@
                 </tr>
             </table>
         </div>
+        <a href="dashboard.jsp" class="logoutbtn">Back</a>
     </div>
 
     <footer>
