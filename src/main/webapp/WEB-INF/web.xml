@@ -44,4 +44,12 @@
         <servlet-name>View-Users</servlet-name>
         <url-pattern>/view-users</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>View-User</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.ViewUserServlet</servlet-class>
+     </servlet>
+    <servlet-mapping>
+        <servlet-name>View-User</servlet-name>
+        <url-pattern>/view-user</url-pattern>
+    </servlet-mapping>
 </web-app>

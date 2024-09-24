@@ -13,7 +13,6 @@ button:hover, a:hover{
 
 h1 {
     margin: 0;
-    padding: 0.67em;
     font-size: 3em;
     text-align: center;
 }
@@ -70,12 +69,13 @@ a:active.active {
 .content {
     display: flex;
     flex-direction: column;
-    margin: 10% 10% 5% 10%;
-    padding: 0 0 2% 0;
+    margin: 10em 15em 5em 15em;
+    padding: 2%;
     border: 3px solid white;
     background-color: #f1f1f1;
     box-shadow: 2px 2px grey;
     align-items: center;
+    gap: 2em;
 
     /* For testing scrolling */
     min-height: 0;
@@ -135,7 +135,7 @@ footer a {
 }
 
 .form {
-    margin: 10% 0 0 0;
+    margin: 10% 0 3% 0;
     border: 3px solid white;
     background-color: #f1f1f1;
     padding: 20px;
@@ -199,8 +199,8 @@ th {
     color: white;
 }
 
-input[type=text],
-input[type=password] {
+.form input[type=text],
+.form input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -209,7 +209,7 @@ input[type=password] {
     box-sizing: border-box;
 }
 
-.logoutbtn {
+.logoutbtn, button{
     text-decoration: none;
     background-color: #385170;
     color: white;
@@ -219,6 +219,7 @@ input[type=password] {
     justify-content: center;
     align-items: center;
     border-radius: 1em;
+    border-style: none;
     display: flex;
 }
 
@@ -230,7 +231,7 @@ input[type=password] {
 .search {
     display: flex;
     justify-content: space-evenly;
-    gap: 10px;
+    gap: 40px;
     padding: 0 0 20px 0;
     align-items: center;
     align-content: center;
@@ -243,4 +244,24 @@ input[type=password] {
     color: white;
     border: none;
     cursor: pointer;
+}
+
+.buttons {
+    display: flex;
+    gap: 50px;
+    padding: 52px 0 0 0;
+}
+
+a.button{
+    text-decoration: none;
+    background-color: #385170;
+    font-size: 13px;
+    color: white;
+    width: 4vw;
+    height: 2em;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+    line-height: 26px;
+    display: flex;
 }

@@ -24,9 +24,7 @@
         </header>
 
         <div class="content">
-            <div>
-                <h1>Dashboard</h1>
-            </div>
+            <h1>Dashboard</h1>
             <div class="dashboard">
                 <ul>
                     <li><a href="view-users">View Users</a></li>
@@ -35,9 +33,7 @@
                     <li><a href=".">View Order Logs</a></li>
                 </ul>
             </div>
-            <div id="center">
-                <a href="logout" class="logoutbtn">Logout</a>
-            </div>
+            <a href="logout" class="logoutbtn">Logout</a>
         </div>
 
         <footer>
