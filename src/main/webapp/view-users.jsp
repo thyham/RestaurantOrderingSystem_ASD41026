@@ -24,7 +24,7 @@
 
     <header>
         <div>
-            <img src="" alt="Logo">
+            <img src="placeholderimage.webp" alt="Logo" height="80px" width="80px">
         </div>
         <ul>
             <li><a href="homedirect.jsp">Home</a></li>

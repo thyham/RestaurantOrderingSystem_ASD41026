@@ -37,7 +37,7 @@
 
         <header>
             <div>
-                <img src="" alt="Logo">
+                <img src="placeholderimage.webp" alt="Logo" height="80px" width="80px">
             </div>
             <ul>
                 <li><a href="homedirect.jsp">Home</a></li>
@@ -49,7 +49,7 @@
 
         <div id="center">
             <form action="login" , method="post" class="content">
-                <h1>Viewing Name</h1>
+                <h1>Viewing <%= fname%> <%= surname%>'s Profile</h1>
                 <table>
                     <div class="profile">
                         <tr>
