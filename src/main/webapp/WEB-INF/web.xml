@@ -52,4 +52,12 @@
         <servlet-name>View-User</servlet-name>
         <url-pattern>/view-user</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Update-User</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.UpdateUserServlet</servlet-class>
+     </servlet>
+    <servlet-mapping>
+        <servlet-name>Update-User</servlet-name>
+        <url-pattern>/update-user</url-pattern>
+    </servlet-mapping>
 </web-app>
