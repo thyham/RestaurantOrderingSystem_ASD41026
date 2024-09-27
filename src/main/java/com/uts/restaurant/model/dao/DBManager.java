@@ -18,8 +18,30 @@ public class DBManager {
     public void temp() throws SQLException {
     }
 
+    public boolean checkUser(String email) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE email=?");
+        ps.setString(1, email);
+        ResultSet rs = ps.executeQuery();
+        return (rs.next());
+    }
+
+    public boolean checkUser(String email, String password) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE email=? AND password=?");
+        ps.setString(1, email);
+        ps.setString(2, password);
+        ResultSet rs = ps.executeQuery();
+        return (rs.next());
+    }
+
     public boolean checkCustomer(int id) throws SQLException {
         PreparedStatement ps = conn.prepareStatement("SELECT * FROM Customers WHERE customer_id=?");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        return (rs.next());
+    }
+
+    public boolean checkStaff(int id) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM Staff WHERE staff_id=?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         return (rs.next());
@@ -98,5 +120,29 @@ public class DBManager {
             
         }
         return new Users(users);
+    }
+
+    public void updateUserFromAdmin(int id, String email, String password, String fname, String surname, String phoneNo, int isActive) throws SQLException {
+        if (!password.equals("")) {
+            PreparedStatement ps = conn.prepareStatement("UPDATE Users SET email=?, password=?, fname=?, surname=?, phoneno=?, isactive=? WHERE user_id=?");
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ps.setString(3, fname);
+            ps.setString(4, surname);
+            ps.setString(5, phoneNo);
+            ps.setInt(6, isActive);
+            ps.setInt(7, id);
+            ps.executeUpdate();
+        }
+        else {
+            PreparedStatement ps = conn.prepareStatement("UPDATE Users SET email=?, fname=?, surname=?, phoneno=?, isactive=? WHERE user_id=?");
+            ps.setString(1, email);
+            ps.setString(2, fname);
+            ps.setString(3, surname);
+            ps.setString(4, phoneNo);
+            ps.setInt(5, isActive);
+            ps.setInt(6, id);
+            ps.executeUpdate();
+        }
     }
 }

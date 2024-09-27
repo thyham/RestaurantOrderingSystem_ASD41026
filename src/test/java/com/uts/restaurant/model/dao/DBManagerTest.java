@@ -1,5 +1,6 @@
 package com.uts.restaurant.model.dao;
 
+import com.uts.restaurant.model.User;
 import com.uts.restaurant.model.Users;
 
 import java.sql.*;
@@ -105,6 +106,77 @@ public class DBManagerTest {
         }
     }
 
+    @Test //Given that a newly created user is added to the users table, when checkUser() method is called with the user email and password, then it should return true.
+    public void testCheckUser() {
+        try {
+            manager.addCustomer("test@mail.com", "test", "Test", "Test", "0412345678");
+            assertTrue(manager.checkUser("test@mail.com", "test"));
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);  
+        }
+    }
+
+    @Test //Given that a newly created user is added to the users table via the addCustomer() method, when checkCustomer() method is called with the user id, then it should return true.
+    public void testCheckCustomerAsCustomer() {
+        try {
+            manager.addCustomer("test@mail.com", "test", "Test", "Test", "0412345678");
+            ResultSet rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                assertTrue(manager.checkCustomer(id));
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+    }
+
+    @Test //Given that a newly created user is added to the users table via the addStaff() method, when checkCustomer() method is called with the user id, then it should return false.
+    public void testCheckCustomerAsStaff() {
+        try {
+            manager.addStaff("test@mail.com", "test", "Test", "Test", "0412345678");
+            ResultSet rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                assertFalse(manager.checkCustomer(id));
+            }      
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);  
+        }
+    }
+
+    @Test //Given that a newly created user is added to the users table via the addCustomer() method, when checkStaff() method is called with the user id, then it should return false.
+    public void testCheckStaffAsCustomer() {
+        try {
+            manager.addCustomer("test@mail.com", "test", "Test", "Test", "0412345678");
+            ResultSet rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                assertFalse(manager.checkStaff(id));
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+    }
+
+    @Test //Given that a newly created user is added to the users table via the addStaff() method, when checkStaff() method is called with the user id, then it should return true.
+    public void testCheckStaffAsStaff() {
+        try {
+            manager.addStaff("test@mail.com", "test", "Test", "Test", "0412345678");
+            ResultSet rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                assertTrue(manager.checkStaff(id));
+            }      
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);  
+        }
+    }
+
     @Test //Given that newly created users are added to the users table, when getUsers() method is called, then an arraylist of user objects should be returned with details corresponding to the created users.
     public void testGetUsers() {
         try {
@@ -127,6 +199,27 @@ public class DBManagerTest {
             assertEquals("Test5", users.getUsers().get(2).getFname());
             assertEquals("Test6", users.getUsers().get(2).getSurname());
             assertEquals("0433333333", users.getUsers().get(2).getPhoneNo());
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+    }
+
+    @Test //Given that a newly created user is added to the users table, when updateUser() method is called, then the created user should be modified to contain the parameters input in the method.
+    public void testUpdateUser() {
+        try {
+            manager.addCustomer("test1@mail.com", "test1", "Test1", "Test2", "0411111111");
+            ResultSet rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                manager.updateUserFromAdmin(id, "test2@mail.com", "test2", "Test3", "Test4", "0422222222", (int)0);
+                User user = manager.getUser(id);
+                assertEquals("test2@mail.com", user.getEmail());
+                assertEquals("Test3", user.getFname());
+                assertEquals("Test4", user.getSurname());
+                assertEquals("0422222222", user.getPhoneNo());
+                assertFalse(user.isActive());
+            }
         }
         catch (SQLException ex) {
             Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   

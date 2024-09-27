@@ -24,7 +24,7 @@
 
     <header>
         <div>
-            <img src="" alt="Logo">
+            <img src="placeholderimage.webp" alt="Logo" height="80px" width="80px">
         </div>
         <ul>
             <li><a href="homedirect.jsp">Home</a></li>
@@ -99,7 +99,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><a href="."><button>Add</button></a></td>
+                    <td><a href="add-user.jsp"><button>Add</button></a></td>
                 </tr>
             </table>
         </div>
