@@ -20,10 +20,10 @@
         String fnameErr = (String) session.getAttribute("fnameErr");
         String surnameErr = (String) session.getAttribute("surnameErr");
         String phoneErr = (String) session.getAttribute("phoneErr");
-        session.setAttribute("emailErr", "Enter email");
-        session.setAttribute("fnameErr", "Enter first name");
-        session.setAttribute("surnameErr", "Enter surname");
-        session.setAttribute("phoneErr", "Enter phone number");
+        session.setAttribute("emailErr", "");
+        session.setAttribute("fnameErr", "");
+        session.setAttribute("surnameErr", "");
+        session.setAttribute("phoneErr", "");
         session.setAttribute("duplicateErr", "");
     %>
 
@@ -42,7 +42,7 @@
     <div id="center">
         <form action="add-user" , method="post" class="content">
             <h1>Add User</h1>
-            <%= (duplicateErr != null ? duplicateErr : "")%>
+            <div style="color: red;"><%= (duplicateErr != null ? duplicateErr : "")%></div>
             <table>
                 <div class="profile">
                     <tr>
