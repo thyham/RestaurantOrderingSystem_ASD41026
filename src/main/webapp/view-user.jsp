@@ -75,18 +75,18 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><label for="phoneNo"><b>Phone Number</b></label></td>
-                            <td><input type="text" name="phoneNo" value="<%= phoneNo%>" required>
-                                <% if (phoneErr != null) { %>
-                                    <br><div style="color: red;"><%= phoneErr%></div>
-                                <% } %>
-                            </td>
-                        </tr>
-                        <tr>
                             <td><label for="email"><b>Email</b></label></td>
                             <td><input type="text" name="email" value="<%= email%>" required>
                                 <% if (emailErr != null) { %>
                                     <br><div style="color: red;"><%= emailErr%></div>
+                                <% } %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="phoneNo"><b>Phone Number</b></label></td>
+                            <td><input type="text" name="phoneNo" value="<%= phoneNo%>" required>
+                                <% if (phoneErr != null) { %>
+                                    <br><div style="color: red;"><%= phoneErr%></div>
                                 <% } %>
                             </td>
                         </tr>

@@ -60,4 +60,12 @@
         <servlet-name>Update-User</servlet-name>
         <url-pattern>/update-user</url-pattern>
     </servlet-mapping>
+        <servlet>
+        <servlet-name>Add-User</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.AddUserServlet</servlet-class>
+     </servlet>
+    <servlet-mapping>
+        <servlet-name>Add-User</servlet-name>
+        <url-pattern>/add-user</url-pattern>
+    </servlet-mapping>
 </web-app>

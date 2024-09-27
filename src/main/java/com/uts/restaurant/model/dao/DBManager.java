@@ -18,6 +18,13 @@ public class DBManager {
     public void temp() throws SQLException {
     }
 
+    public boolean checkUser(String email) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE email=?");
+        ps.setString(1, email);
+        ResultSet rs = ps.executeQuery();
+        return (rs.next());
+    }
+
     public boolean checkUser(String email, String password) throws SQLException {
         PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE email=? AND password=?");
         ps.setString(1, email);
