@@ -20,6 +20,8 @@
 
     <%
         Users users = (Users)request.getSession().getAttribute("users");
+        String emailFilter = (String) session.getAttribute("emailFilter");
+        String phoneNoFilter = (String) session.getAttribute("phoneNoFilter");
     %>
 
     <header>
@@ -39,9 +41,9 @@
             <h1>Viewing Users</h1>
         </div>
         <div>
-            <form action="index.jsp", method="post" class="search">
-                <input type="text" id="emailFilter" name="emailFilter" value="" placeholder="Filter by email...">
-                <input type="text" id="phoneNoFilter" name="phoneNoFilter" value="" placeholder="Filter by phone number...">
+            <form action="search-users", method="post" class="search">
+                <input type="text" id="emailFilter" name="emailFilter" value="<%= (emailFilter != null ? emailFilter : "")%>" placeholder="Filter by email...">
+                <input type="text" id="phoneNoFilter" name="phoneNoFilter" value="<%= (phoneNoFilter != null ? phoneNoFilter : "")%>" placeholder="Filter by phone number...">
                 <button type="submit">Search</button>
             </form>
             <table>
@@ -76,8 +78,8 @@
                         }
                 %>
                 <tr>
-                    <form action="index.jsp", method="post">
-                        <input type="hidden" name="id">
+                    <form action="delete-user", method="post">
+                        <input type="hidden" name="id" value="<%= id%>">
                         <td><button>x</button></td>
                     </form>
                     <td><%= id%></td>

@@ -31,7 +31,7 @@
     <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>com.uts.restaurant.controller.LogoutServlet</servlet-class>
-     </servlet>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
@@ -39,7 +39,7 @@
     <servlet>
         <servlet-name>View-Users</servlet-name>
         <servlet-class>com.uts.restaurant.controller.ViewUsersServlet</servlet-class>
-     </servlet>
+    </servlet>
     <servlet-mapping>
         <servlet-name>View-Users</servlet-name>
         <url-pattern>/view-users</url-pattern>
@@ -47,7 +47,7 @@
     <servlet>
         <servlet-name>View-User</servlet-name>
         <servlet-class>com.uts.restaurant.controller.ViewUserServlet</servlet-class>
-     </servlet>
+    </servlet>
     <servlet-mapping>
         <servlet-name>View-User</servlet-name>
         <url-pattern>/view-user</url-pattern>
@@ -55,17 +55,33 @@
     <servlet>
         <servlet-name>Update-User</servlet-name>
         <servlet-class>com.uts.restaurant.controller.UpdateUserServlet</servlet-class>
-     </servlet>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Update-User</servlet-name>
         <url-pattern>/update-user</url-pattern>
     </servlet-mapping>
-        <servlet>
+    <servlet>
         <servlet-name>Add-User</servlet-name>
         <servlet-class>com.uts.restaurant.controller.AddUserServlet</servlet-class>
-     </servlet>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Add-User</servlet-name>
         <url-pattern>/add-user</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Delete-User</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.DeleteUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Delete-User</servlet-name>
+        <url-pattern>/delete-user</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Search-Users</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.SearchUsersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Search-Users</servlet-name>
+        <url-pattern>/search-users</url-pattern>
     </servlet-mapping>
 </web-app>
