@@ -9,3 +9,5 @@ Make sure the username is "root" and password is "password" for the MySQL connec
 MySQL tables are in db folder and should be added to the schema.
 
 Once compiled, host the .war file on Apache Tomcat and access the project at http://localhost:8080/restaurant-1.0 in your browser.
+
+To log in as the system admin, enter the email as "root" and the password as "restaurant" on the login page of the website.
