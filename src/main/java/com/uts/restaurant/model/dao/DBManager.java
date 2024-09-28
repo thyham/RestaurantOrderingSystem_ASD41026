@@ -145,4 +145,33 @@ public class DBManager {
             ps.executeUpdate();
         }
     }
+
+    public void deleteUser(int id) throws SQLException{ 
+        PreparedStatement ps = conn.prepareStatement("DELETE FROM Users WHERE user_id=?");
+        ps.setInt(1, id);
+        ps.executeUpdate();
+    }
+
+    public Users getUsers(String emailFilter, String phoneNoFilter) throws SQLException {
+        ArrayList<User> users = new ArrayList<User>();
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE email LIKE ? AND phoneno LIKE ?");
+        ps.setString(1, emailFilter + "%");
+        ps.setString(2, phoneNoFilter + "%");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("user_id");
+            String email = rs.getString("email");
+            String fname = rs.getString("fname");
+            String surname = rs.getString("surname");
+            String phoneNo = rs.getString("phoneno");
+            Boolean isActive = rs.getBoolean("isactive");
+            if (checkCustomer(id)) {
+                users.add(new Customer(id, fname, surname, email, phoneNo, isActive));
+            }
+            else {
+                users.add(new Staff(id, fname, surname, email, phoneNo, isActive));
+            }
+        }
+        return new Users(users);
+    }
 }
