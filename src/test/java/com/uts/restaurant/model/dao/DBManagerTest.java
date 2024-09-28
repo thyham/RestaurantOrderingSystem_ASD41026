@@ -225,4 +225,85 @@ public class DBManagerTest {
             Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
         }
     }
+
+    @Test //Given a newly created user is added to the users table, when deleteUser() method is called, then the created user should be deleted from the user table.
+    public void testDeleteUser() {
+        try {
+            manager.addCustomer("test1@mail.com", "test1", "Test1", "Test2", "0411111111");
+            ResultSet rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                manager.deleteUser(id);
+                User user = manager.getUser(id);
+                assertEquals(null, user);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+    }
+
+    @Test //Given that newly created users are added to the users table, when getUsers() method is called with email filter, then an arraylist of user objects containing email filter (beginning from the start of string) should be returned with details corresponding to the created users.
+    public void testGetUsersEmailFilter() {
+        try {
+            manager.addCustomer("test1@mail.com", "test1", "Test1", "Test2", "0411111111");
+            manager.addCustomer("test1@mail2.com", "test2", "Test3", "Test4", "0422222222");
+            manager.addStaff("test3@mail.com", "test3", "Test5", "Test6", "0433333333");
+            Users users = manager.getUsers("test1@ma", "");
+            assertNotNull(users.getUsers().get(0));
+            assertNotNull(users.getUsers().get(1));
+            assertEquals("test1@mail.com", users.getUsers().get(0).getEmail());
+            assertEquals("Test1", users.getUsers().get(0).getFname());
+            assertEquals("Test2", users.getUsers().get(0).getSurname());
+            assertEquals("0411111111", users.getUsers().get(0).getPhoneNo());
+            assertEquals("test1@mail2.com", users.getUsers().get(1).getEmail());
+            assertEquals("Test3", users.getUsers().get(1).getFname());
+            assertEquals("Test4", users.getUsers().get(1).getSurname());
+            assertEquals("0422222222", users.getUsers().get(1).getPhoneNo());
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+    }
+
+    @Test //Given that newly created users are added to the users table, when getUsers() method is called with phone filter, then an arraylist of user objects containing phone filter (beginning from the start of string) should be returned with details corresponding to the created users.
+    public void testGetUsersPhoneFilter() {
+        try {
+            manager.addCustomer("test1@mail.com", "test1", "Test1", "Test2", "0411111111");
+            manager.addCustomer("test2@mail.com", "test2", "Test3", "Test4", "0411111111");
+            manager.addStaff("test3@mail.com", "test3", "Test5", "Test6", "0433333333");
+            Users users = manager.getUsers("", "041111");
+            assertNotNull(users.getUsers().get(0));
+            assertNotNull(users.getUsers().get(1));
+            assertEquals("test1@mail.com", users.getUsers().get(0).getEmail());
+            assertEquals("Test1", users.getUsers().get(0).getFname());
+            assertEquals("Test2", users.getUsers().get(0).getSurname());
+            assertEquals("0411111111", users.getUsers().get(0).getPhoneNo());
+            assertEquals("test2@mail.com", users.getUsers().get(1).getEmail());
+            assertEquals("Test3", users.getUsers().get(1).getFname());
+            assertEquals("Test4", users.getUsers().get(1).getSurname());
+            assertEquals("0411111111", users.getUsers().get(1).getPhoneNo());
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+    }
+
+    @Test //Given that newly created users are added to the users table, when getUsers() method is called with email and phone filter, then an arraylist of user objects containing email and phone filter (beginning from the start of strings) should be returned with details corresponding to the created users.
+    public void testGetUsersEmailAndPhoneFilter() {
+        try {
+            manager.addCustomer("test1@mail.com", "test1", "Test1", "Test2", "0411111111");
+            manager.addCustomer("test1@mail2.com", "test2", "Test3", "Test4", "0422222222");
+            manager.addStaff("test3@mail.com", "test3", "Test5", "Test6", "0433333333");
+            Users users = manager.getUsers("test1@ma", "042");
+            assertNotNull(users.getUsers().get(0));
+            assertEquals("test1@mail2.com", users.getUsers().get(0).getEmail());
+            assertEquals("Test3", users.getUsers().get(0).getFname());
+            assertEquals("Test4", users.getUsers().get(0).getSurname());
+            assertEquals("0422222222", users.getUsers().get(0).getPhoneNo());
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+    }
 }
