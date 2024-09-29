@@ -51,11 +51,11 @@
                 <table>
                     <div class="profile">
                         <tr>
-                            <td><b>Id:</b></td>
+                            <td><b>Id</b></td>
                             <td><%= id%> <input name="id" type="hidden" value="<%= id%>"></td>
                         </tr>
                         <tr>
-                            <td><b>User Type:</b></td>
+                            <td><b>User Type</b></td>
                             <td><%= type%></td>
                         </tr>
                         <tr>
