@@ -10,13 +10,15 @@ pool:
   vmImage: windows-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: choco install mysql
+  displayName: 'Install MySQL'
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    cd "C:\Program Files\MySQL\MySQL Server 8.0\bin"
+    mysqld -u root --initialize-insecure --console
+    mysql -u root --skip-password < mysql-init.txt
+    mysql --user=root --password=password --port=3306 --host=localhost --execute="CREATE DATABASE IF NOT EXISTS restaurant;" && mysql --user=root --password=password --port=3306 --host=localhost restaurant < Dump20241001.sql
+  displayName: 'Setup MySQL Database'
 
 - task: Maven@4
   inputs:
