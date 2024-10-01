@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="productStyles.css">
+        <title>Product Page</title>
+
+    </head>
+    <body>
+        <div class="column-container">
+            <div class ="column">
+                <img id="food-image" src="/Users/danielhoang/Documents/RestaurantOrderingSystem_ASD41026/src/main/webapp/food1.jpg" alt="Placeholder Image">
+            </div>
+
+            <div class="column">
+                
+                <div class="food-details">
+
+                    <h1>Product Name</h1>
+                    <h3>$15.00</h3>
+                    <p>This describes the food item and its ingredients. This dish includes lettuce, tomato, cucumber, pickle.</p>
+
+                
+                </div>
+
+                <div class="food-customisation">
+                    <h3>Customise Your Food</h3>
+                    <form id="customisation-form">
+                        <label for="customise">Requests:</label>
+                        <textarea id="cutomise" name="Customise" rows="10" cols="40"></textarea>
+                        <br>
+                        <br>
+                    
+                        
+                        <select name="quantity" id="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <button type="submit" class ="button" >Add to order</button>
+                    </form>
+
+                </div>
+
+            </div>  
+
+        </div>
+
+        
+
+
+
+    </body>
+</html>
