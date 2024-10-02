@@ -1,0 +1,32 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- script: choco install mysql
+  displayName: 'Install MySQL'
+
+- script: |
+    cd "C:\Program Files\MySQL\MySQL Server 8.0\bin"
+    mysqld -u root --initialize-insecure --console
+    mysql -u root --skip-password < mysql-init.txt
+    mysql --user=root --password=password --port=3306 --host=localhost --execute="CREATE DATABASE IF NOT EXISTS restaurant;" && mysql --user=root --password=password --port=3306 --host=localhost restaurant < Dump20241002.sql
+  displayName: 'Setup MySQL Database'
+
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
