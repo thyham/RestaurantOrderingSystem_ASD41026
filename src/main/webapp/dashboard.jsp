@@ -28,7 +28,7 @@
             <div class="dashboard">
                 <ul>
                     <li><a href="view-users">View Users</a></li>
-                    <li><a href=".">View Access Logs</a></li>
+                    <li><a href="view-access-logs">View Access Logs</a></li>
                     <li><a href=".">View Product Logs</a></li>
                     <li><a href=".">View Order Logs</a></li>
                 </ul>

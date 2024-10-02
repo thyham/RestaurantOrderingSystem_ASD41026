@@ -5,11 +5,7 @@ public class Customer extends User {
         super(id, fname, surname, email, phoneNo, isActive);
     }
 
-    public Customer(String fname, String surname, String email, String phoneNo, Boolean isActive) {
-        super(fname, surname, email, phoneNo, isActive);
-    }
-    
-    public Customer(String fname, String surname, String email, String phoneNo) {
-        super(fname, surname, email, phoneNo);
+    public Customer(int id, String email) {
+        super(id, email);
     }
 }
