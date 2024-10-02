@@ -2,6 +2,7 @@ package com.uts.restaurant.model.dao;
 
 import com.uts.restaurant.model.User;
 import com.uts.restaurant.model.Users;
+import com.uts.restaurant.model.AccessLogs;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -301,6 +302,70 @@ public class DBManagerTest {
             assertEquals("Test3", users.getUsers().get(0).getFname());
             assertEquals("Test4", users.getUsers().get(0).getSurname());
             assertEquals("0422222222", users.getUsers().get(0).getPhoneNo());
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+    }
+
+    @Test
+    public void testAddAccessLog() {
+        try {
+            int id = -1;
+            manager.addCustomer("test1@mail.com", "test1", "Test1", "Test2", "0411111111");
+            ResultSet rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1);
+                manager.addAccessLog(id, "2024-09-29 14:30:08", "Successful Login");
+            }
+            rs = conn.prepareStatement("SELECT * FROM accesslogs").executeQuery();
+            if (rs.next()) {
+                assertEquals(id, rs.getInt("user_id"));
+                assertEquals("2024-09-29 14:30:08", rs.getString("date"));
+                assertEquals("Successful Login", rs.getString("desc"));
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+    }
+
+    @Test
+    public void testGetAccessLogs() {
+        try {
+            int id1 = -1, id2 = -1, id3 = -1;
+            manager.addCustomer("test1@mail.com", "test1", "Test1", "Test2", "0411111111");
+            ResultSet rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                id1 = rs.getInt(1);
+            }
+            manager.addAccessLog(id1, "2024-09-29 14:30:08", "Successful Login");
+            manager.addCustomer("test2@mail.com", "test2", "Test3", "Test4", "0422222222");
+            rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                id2 = rs.getInt(1);
+            }
+            manager.addAccessLog(id2,"2024-09-30 12:28:58","Successful Login");
+            manager.addStaff("test3@mail.com", "test3", "Test5", "Test6", "0433333333");
+            rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                id3 = rs.getInt(1);
+            }
+            manager.addAccessLog(id3,"2024-09-28 13:31:42","Successful Login");
+            
+            AccessLogs accessLogs = manager.getAccessLogs();
+            assertNotNull(accessLogs.getAccessLogs().get(0));
+            assertNotNull(accessLogs.getAccessLogs().get(1));
+            assertNotNull(accessLogs.getAccessLogs().get(2));
+            assertEquals(id1, accessLogs.getAccessLogs().get(0).getUser().getID());
+            assertEquals("2024-09-29 14:30:08", accessLogs.getAccessLogs().get(0).getDate());
+            assertEquals("Successful Login", accessLogs.getAccessLogs().get(0).getDesc());
+            assertEquals(id2, accessLogs.getAccessLogs().get(1).getUser().getID());
+            assertEquals("2024-09-30 12:28:58", accessLogs.getAccessLogs().get(1).getDate());
+            assertEquals("Successful Login", accessLogs.getAccessLogs().get(1).getDesc());
+            assertEquals(id3, accessLogs.getAccessLogs().get(2).getUser().getID());
+            assertEquals("2024-09-28 13:31:42", accessLogs.getAccessLogs().get(2).getDate());
+            assertEquals("Successful Login", accessLogs.getAccessLogs().get(1).getDesc());
         }
         catch (SQLException ex) {
             Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   

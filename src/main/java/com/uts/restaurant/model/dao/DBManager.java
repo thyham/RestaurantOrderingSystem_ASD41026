@@ -7,6 +7,8 @@ import com.uts.restaurant.model.Customer;
 import com.uts.restaurant.model.Staff;
 import com.uts.restaurant.model.User;
 import com.uts.restaurant.model.Users;
+import com.uts.restaurant.model.AccessLog;
+import com.uts.restaurant.model.AccessLogs;
 
 public class DBManager {
     Connection conn;
@@ -173,5 +175,32 @@ public class DBManager {
             }
         }
         return new Users(users);
+    }
+
+    public void addAccessLog(int id, String date, String desc) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO AccessLogs (user_id, `date`, `desc`) VALUES (?, ?, ?)");
+        ps.setInt(1, id);
+        ps.setString(2, date);
+        ps.setString(3, desc);
+        ps.executeUpdate();
+    }
+
+    public AccessLogs getAccessLogs() throws SQLException {
+        ArrayList<AccessLog> accessLogs = new ArrayList<AccessLog>();
+        ResultSet rs = conn.prepareStatement("SELECT accesslogs.user_id, users.email, accesslogs.date, accesslogs.desc FROM accesslogs INNER JOIN users ON accesslogs.user_id=users.user_id;").executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("user_id");
+            String email = rs.getString("email");
+            String date = rs.getString("date");
+            String desc = rs.getString("desc");
+            if (checkCustomer(id)) {
+                accessLogs.add(new AccessLog(new Customer(id, email), date, desc));
+            }
+            else {
+                accessLogs.add(new AccessLog(new Staff(id, email), date, desc));
+            }
+            
+        }
+        return new AccessLogs(accessLogs);
     }
 }

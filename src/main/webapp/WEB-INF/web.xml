@@ -84,4 +84,12 @@
         <servlet-name>Search-Users</servlet-name>
         <url-pattern>/search-users</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>View-Access-Logs</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.ViewAccessLogsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>View-Access-Logs</servlet-name>
+        <url-pattern>/view-access-logs</url-pattern>
+    </servlet-mapping>
 </web-app>

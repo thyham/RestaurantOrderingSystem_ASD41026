@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-<%@page import="com.uts.restaurant.model.Users"%>
+<%@page import="com.uts.restaurant.model.AccessLogs"%>
+<%@page import="com.uts.restaurant.model.AccessLog"%>
 <%@page import="com.uts.restaurant.model.User"%>
 <%@page import="com.uts.restaurant.model.Customer"%>
 <%@page import="java.io.IOException"%>
@@ -19,9 +20,8 @@
 <body>
 
     <%
-        Users users = (Users) request.getSession().getAttribute("users");
+        AccessLogs accessLogs = (AccessLogs) request.getSession().getAttribute("accessLogs");
         String emailFilter = (String) session.getAttribute("emailFilter");
-        String phoneNoFilter = (String) session.getAttribute("phoneNoFilter");
     %>
 
     <header>
@@ -38,71 +38,49 @@
 
     <div class="content">
         <div>
-            <h1>Viewing Users</h1>
+            <h1>Viewing Access Logs</h1>
         </div>
         <div>
-            <form action="search-users", method="post" class="search">
+            <form action="", method="post" class="search">
                 <input type="text" id="emailFilter" name="emailFilter" value="<%= (emailFilter != null ? emailFilter : "")%>" placeholder="Filter by email...">
-                <input type="text" id="phoneNoFilter" name="phoneNoFilter" value="<%= (phoneNoFilter != null ? phoneNoFilter : "")%>" placeholder="Filter by phone number...">
+                <label for="from">From:</label>
+                <input type="datetime-local" name="from">
+                <label for="to">To:</label>
+                <input type="datetime-local" name="to">
                 <button type="submit">Search</button>
             </form>
             <table id="center">
                 <tr>
-                    <th></th>
-                    <th>ID</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
+                    <th>User ID</th>
+                    <th>User Email</th>
                     <th>User Type</th>
-                    <th>Status</th>
-                    <th></th>
+                    <th>Date</th>
+                    <th>Description</th>
                 </tr>
                 <% 
                     int i = 0;
-                    for (User user : users.getUsers()) {
+                    for (AccessLog accessLog : accessLogs.getAccessLogs()) {
+                        User user = accessLog.getUser();
                         int id = user.getID();
                         String email = user.getEmail();
-                        String phoneNo = user.getPhoneNo();
+                        String date = accessLog.getDate();
+                        String desc = accessLog.getDesc();
                         String type = "";
-                        String status = "";
                         if (user instanceof Customer) {
                             type = "Customer";
                         }
                         else {
                             type = "Staff";
                         }
-                        if (user.isActive()) {
-                            status = "Active";
-                        }
-                        else {
-                            status = "Inactive";
-                        }
                 %>
                 <tr>
-                    <form action="delete-user", method="post">
-                        <input type="hidden" name="id" value="<%= id%>">
-                        <td><button>x</button></td>
-                    </form>
                     <td><%= id%></td>
                     <td><%= email%></td>
-                    <td><%= phoneNo%></td>
                     <td><%= type%></td>
-                    <td><%= status%></td>
-                    <form action="view-user", method="post">
-                        <input type="hidden" name="id" value="<%= id%>">
-                        <input type="hidden" name="type" value="<%= type%>">
-                        <td><button>View</button></td>
-                    </form>
+                    <td><%= date%></td>
+                    <td><%= desc%></td>
                 </tr>
                 <% i++; }%>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="add-user.jsp"><button>Add</button></a></td>
-                </tr>
             </table>
         </div>
         <a href="dashboard.jsp" class="logoutbtn">Back</a>
@@ -118,5 +96,3 @@
         <p>By Group 6 | University of Technology | Spring 2024</p>
     </footer>
 </body>
-
-</html>
