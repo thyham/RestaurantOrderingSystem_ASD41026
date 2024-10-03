@@ -41,9 +41,9 @@
             <h1>Viewing Users</h1>
         </div>
         <div>
-            <form action="search-users", method="post" class="search">
-                <input type="text" id="emailFilter" name="emailFilter" value="<%= (emailFilter != null ? emailFilter : "")%>" placeholder="Filter by email...">
-                <input type="text" id="phoneNoFilter" name="phoneNoFilter" value="<%= (phoneNoFilter != null ? phoneNoFilter : "")%>" placeholder="Filter by phone number...">
+            <form action="view-users", method="post" class="search">
+                <input type="text" id="emailFilter" name="emailFilter" value="<%= emailFilter%>" placeholder="Filter by email...">
+                <input type="text" id="phoneNoFilter" name="phoneNoFilter" value="<%= phoneNoFilter%>" placeholder="Filter by phone number...">
                 <button type="submit">Search</button>
             </form>
             <table id="center">

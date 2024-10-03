@@ -22,6 +22,8 @@
     <%
         AccessLogs accessLogs = (AccessLogs) request.getSession().getAttribute("accessLogs");
         String emailFilter = (String) session.getAttribute("emailFilter");
+        String fromDate = (String)request.getSession().getAttribute("fromDate");
+        String toDate = (String)request.getSession().getAttribute("toDate");
     %>
 
     <header>
@@ -41,12 +43,12 @@
             <h1>Viewing Access Logs</h1>
         </div>
         <div>
-            <form action="", method="post" class="search">
+            <form action="view-access-logs", method="post" class="search">
                 <input type="text" id="emailFilter" name="emailFilter" value="<%= (emailFilter != null ? emailFilter : "")%>" placeholder="Filter by email...">
-                <label for="from">From:</label>
-                <input type="datetime-local" name="from">
-                <label for="to">To:</label>
-                <input type="datetime-local" name="to">
+                <label for="fromDate">From:</label>
+                <input type="datetime-local" name="fromDate" value="<%= fromDate%>">
+                <label for="toDate">To:</label>
+                <input type="datetime-local" name="toDate" value="<%= toDate%>">
                 <button type="submit">Search</button>
             </form>
             <table id="center">

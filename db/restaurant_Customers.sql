@@ -1,3 +1,5 @@
+use restaurant;
+
 DROP TABLE IF EXISTS `Customers`;
 
 CREATE TABLE `Customers` (

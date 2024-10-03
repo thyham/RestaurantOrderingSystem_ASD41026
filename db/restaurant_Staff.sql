@@ -1,3 +1,5 @@
+use restaurant;
+
 DROP TABLE IF EXISTS `Staff`;
 
 CREATE TABLE `Staff` (
