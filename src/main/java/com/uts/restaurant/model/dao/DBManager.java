@@ -155,6 +155,12 @@ public class DBManager {
     }
 
     public Users getUsers(String emailFilter, String phoneNoFilter) throws SQLException {
+        /*if (emailFilter == null) {
+            emailFilter = "";
+        }
+        if (phoneNoFilter == null) {
+            phoneNoFilter = "";
+        }*/
         ArrayList<User> users = new ArrayList<User>();
         PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE email LIKE ? AND phoneno LIKE ?");
         ps.setString(1, emailFilter + "%");
@@ -187,7 +193,30 @@ public class DBManager {
 
     public AccessLogs getAccessLogs() throws SQLException {
         ArrayList<AccessLog> accessLogs = new ArrayList<AccessLog>();
-        ResultSet rs = conn.prepareStatement("SELECT accesslogs.user_id, users.email, accesslogs.date, accesslogs.desc FROM accesslogs INNER JOIN users ON accesslogs.user_id=users.user_id;").executeQuery();
+        ResultSet rs = conn.prepareStatement("SELECT accesslogs.user_id, users.email, accesslogs.date, accesslogs.desc FROM accesslogs INNER JOIN users ON accesslogs.user_id=users.user_id").executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("user_id");
+            String email = rs.getString("email");
+            String date = rs.getString("date");
+            String desc = rs.getString("desc");
+            if (checkCustomer(id)) {
+                accessLogs.add(new AccessLog(new Customer(id, email), date, desc));
+            }
+            else {
+                accessLogs.add(new AccessLog(new Staff(id, email), date, desc));
+            }
+            
+        }
+        return new AccessLogs(accessLogs);
+    }
+
+    public AccessLogs getAccessLogs(String emailFilter, String fromDate, String toDate) throws SQLException {
+        ArrayList<AccessLog> accessLogs = new ArrayList<AccessLog>();
+        PreparedStatement ps = conn.prepareStatement("SELECT accesslogs.user_id, users.email, accesslogs.date, accesslogs.desc FROM accesslogs INNER JOIN users ON accesslogs.user_id=users.user_id WHERE users.email LIKE ? AND ? <= date AND date <= ?");
+        ps.setString(1, emailFilter + "%");
+        ps.setString(2, fromDate);
+        ps.setString(3, toDate);
+        ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             int id = rs.getInt("user_id");
             String email = rs.getString("email");
