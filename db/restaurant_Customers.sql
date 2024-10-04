@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `Customers`;
 CREATE TABLE `Customers` (
   `customer_id` int NOT NULL,
   PRIMARY KEY (`customer_id`),
-  CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+  CONSTRAINT `fk__Customers__Users` FOREIGN KEY (`customer_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `Customers` WRITE;
