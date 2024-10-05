@@ -1,14 +1,19 @@
 package com.uts.restaurant.model.dao;
 
-import java.sql.*;
-import java.util.ArrayList;
-
+import com.uts.restaurant.model.AccessLog;
+import com.uts.restaurant.model.AccessLogs;
 import com.uts.restaurant.model.Customer;
+import com.uts.restaurant.model.Product;
+import com.uts.restaurant.model.ProductLog;
+import com.uts.restaurant.model.ProductLogs;
 import com.uts.restaurant.model.Staff;
 import com.uts.restaurant.model.User;
 import com.uts.restaurant.model.Users;
-import com.uts.restaurant.model.AccessLog;
-import com.uts.restaurant.model.AccessLogs;
+
+import java.math.BigDecimal;
+import java.sql.*;
+import java.util.ArrayList;
+
 
 public class DBManager {
     Connection conn;
@@ -105,7 +110,7 @@ public class DBManager {
 
     public Users getUsers() throws SQLException {
         ArrayList<User> users = new ArrayList<User>();
-        ResultSet rs = conn.prepareStatement("SELECT * FROM Users").executeQuery();
+        ResultSet rs = conn.prepareStatement("SELECT * FROM Users ORDER BY user_id").executeQuery();
         while (rs.next()) {
             int id = rs.getInt("user_id");
             String email = rs.getString("email");
@@ -155,14 +160,8 @@ public class DBManager {
     }
 
     public Users getUsers(String emailFilter, String phoneNoFilter) throws SQLException {
-        /*if (emailFilter == null) {
-            emailFilter = "";
-        }
-        if (phoneNoFilter == null) {
-            phoneNoFilter = "";
-        }*/
         ArrayList<User> users = new ArrayList<User>();
-        PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE email LIKE ? AND phoneno LIKE ?");
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE email LIKE ? AND phoneno LIKE ? ORDER BY user_id");
         ps.setString(1, emailFilter + "%");
         ps.setString(2, phoneNoFilter + "%");
         ResultSet rs = ps.executeQuery();
@@ -193,7 +192,11 @@ public class DBManager {
 
     public AccessLogs getAccessLogs() throws SQLException {
         ArrayList<AccessLog> accessLogs = new ArrayList<AccessLog>();
-        ResultSet rs = conn.prepareStatement("SELECT accesslogs.user_id, users.email, accesslogs.date, accesslogs.desc FROM accesslogs INNER JOIN users ON accesslogs.user_id=users.user_id").executeQuery();
+        ResultSet rs = conn.prepareStatement(
+        "SELECT accesslogs.user_id, users.email, accesslogs.date, accesslogs.desc " +
+            "FROM accesslogs " +
+            "INNER JOIN users ON accesslogs.user_id=users.user_id " +
+            "ORDER BY user_id").executeQuery();
         while (rs.next()) {
             int id = rs.getInt("user_id");
             String email = rs.getString("email");
@@ -211,8 +214,19 @@ public class DBManager {
     }
 
     public AccessLogs getAccessLogs(String emailFilter, String fromDate, String toDate) throws SQLException {
+        if (fromDate == null || fromDate.isEmpty()) {
+            fromDate = "2000-01-01 00:00:00";
+        }
+        if (toDate == null || toDate.isEmpty()) {
+            toDate = "3000-01-01 23:59:59";
+        }
         ArrayList<AccessLog> accessLogs = new ArrayList<AccessLog>();
-        PreparedStatement ps = conn.prepareStatement("SELECT accesslogs.user_id, users.email, accesslogs.date, accesslogs.desc FROM accesslogs INNER JOIN users ON accesslogs.user_id=users.user_id WHERE users.email LIKE ? AND ? <= date AND date <= ?");
+        PreparedStatement ps = conn.prepareStatement(
+        "SELECT accesslogs.user_id, users.email, accesslogs.date, accesslogs.desc " +
+            "FROM accesslogs " +
+            "INNER JOIN users ON accesslogs.user_id=users.user_id " +
+            "WHERE users.email LIKE ? AND ? <= date AND date <= ? " +
+            "ORDER BY user_id");
         ps.setString(1, emailFilter + "%");
         ps.setString(2, fromDate);
         ps.setString(3, toDate);
@@ -231,5 +245,55 @@ public class DBManager {
             
         }
         return new AccessLogs(accessLogs);
+    }
+
+    public void addProduct(String name, String desc, BigDecimal price) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO Products (`name`, `desc`, `price`) VALUES (?, ?, ?)");
+        ps.setString(1, name);
+        ps.setString(2, desc);
+        ps.setBigDecimal(3, price);
+        ps.executeUpdate();
+    }
+
+    public void addProductLog(int staffID, String date, int productID, String desc) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO ProductLogs (staff_id, `date`, product_id, `desc`) VALUES (?, ?, ?, ?)");
+        ps.setInt(1, staffID);
+        ps.setString(2, date);
+        ps.setInt(3, productID);
+        ps.setString(4, desc);
+        ps.executeUpdate();
+    }
+
+    public ProductLogs getProductLogs(String emailFilter, String productFilter, String fromDate, String toDate) throws SQLException {
+        if (fromDate == null || fromDate.isEmpty()) {
+            fromDate = "2000-01-01 00:00:00";
+        }
+        if (toDate == null || toDate.isEmpty()) {
+            toDate = "3000-01-01 23:59:59";
+        }
+        ArrayList<ProductLog> productLogs = new ArrayList<ProductLog>();
+        PreparedStatement ps = conn.prepareStatement(
+        "SELECT productlogs.staff_id, users.email, productlogs.`date`, products.product_id, products.`name`, productlogs.desc " +
+        "FROM productlogs " +
+            "INNER JOIN users ON productlogs.staff_id=users.user_id " +
+            "INNER JOIN products ON productlogs.product_id=products.product_id " +
+            "WHERE users.email LIKE ? AND products.`name` LIKE ? AND ? <= date AND date <= ? " +
+            "ORDER BY staff_id");
+        ps.setString(1, emailFilter + "%");
+        ps.setString(2, productFilter + "%");
+        ps.setString(3, fromDate);
+        ps.setString(4, toDate);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int staffID = rs.getInt("staff_id");
+            String email = rs.getString("email");
+            String date = rs.getString("date");
+            int productID = rs.getInt("product_id");
+            String productName = rs.getString("name");
+            String desc = rs.getString("desc");
+            productLogs.add(new ProductLog(new Staff(staffID, email), date, new Product(productID, productName), desc));
+            
+        }
+        return new ProductLogs(productLogs);
     }
 }

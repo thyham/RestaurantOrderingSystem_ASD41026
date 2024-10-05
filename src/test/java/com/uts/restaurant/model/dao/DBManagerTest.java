@@ -3,7 +3,9 @@ package com.uts.restaurant.model.dao;
 import com.uts.restaurant.model.User;
 import com.uts.restaurant.model.Users;
 import com.uts.restaurant.model.AccessLogs;
+import com.uts.restaurant.model.ProductLogs;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +32,7 @@ public class DBManagerTest {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurant", "root", "password");
             conn.setAutoCommit(false);
             conn.prepareStatement("DELETE FROM Users").executeUpdate();
+            conn.prepareStatement("DELETE FROM Products").executeUpdate();
             manager = new DBManager(conn); 
         }
         catch (ClassNotFoundException | SQLException ex) {
@@ -308,7 +311,7 @@ public class DBManagerTest {
         }
     }
 
-    @Test
+    @Test //Given that a newly created user is added to the users table, when addAccessLog() method is called, then the access log with correct details should be in the AccessLogs table.
     public void testAddAccessLog() {
         try {
             int id = -1;
@@ -330,7 +333,7 @@ public class DBManagerTest {
         }
     }
 
-    @Test
+    @Test //Given that newly created users and access logs are added to the database, when getAccessLogs() method is called, then an arraylist of AccessLog objects should be returned with details corresponding to the created users/access logs.
     public void testGetAccessLogs() {
         try {
             int id1 = -1, id2 = -1, id3 = -1;
@@ -366,6 +369,136 @@ public class DBManagerTest {
             assertEquals(id3, accessLogs.getAccessLogs().get(2).getUser().getID());
             assertEquals("2024-09-28 13:31:42", accessLogs.getAccessLogs().get(2).getDate());
             assertEquals("Successful Login", accessLogs.getAccessLogs().get(1).getDesc());
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+    }
+
+    @Test //Given that newly created users and access logs are added to the database, when getAccessLogs() method is called with filters, then an arraylist of filtered AccessLog objects should be returned with details corresponding to the created users/access logs.
+    public void testGetAccessLogsFiltered() {
+        try {
+            int id1 = -1, id2 = -1, id3 = -1;
+            manager.addCustomer("test1@mail.com", "test1", "Test1", "Test2", "0411111111");
+            ResultSet rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                id1 = rs.getInt(1);
+            }
+            manager.addAccessLog(id1, "2024-09-29 14:30:08", "Successful Login");
+            manager.addCustomer("test2@mail.com", "test2", "Test3", "Test4", "0422222222");
+            rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                id2 = rs.getInt(1);
+            }
+            manager.addAccessLog(id2,"2024-09-30 12:28:58","Successful Login");
+            manager.addStaff("test3@mail.com", "test3", "Test5", "Test6", "0433333333");
+            rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                id3 = rs.getInt(1);
+            }
+            manager.addAccessLog(id3,"2024-09-28 13:31:42","Successful Login");
+            
+            AccessLogs accessLogs = manager.getAccessLogs("test1", "2024-09-29 12:28:58", "");
+            assertNotNull(accessLogs.getAccessLogs().get(0));
+            assertEquals(id1, accessLogs.getAccessLogs().get(0).getUser().getID());
+            assertEquals("2024-09-29 14:30:08", accessLogs.getAccessLogs().get(0).getDate());
+            assertEquals("Successful Login", accessLogs.getAccessLogs().get(0).getDesc());
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+    }
+
+    @Test //Given that the Products table is set up, when addProduct() method is called, then the product with associated details should be added to Products table.
+    public void testAddProduct() {
+        try {
+            manager.addProduct("product", "product desc", new BigDecimal("1.50"));
+            ResultSet rs = conn.prepareStatement("SELECT * FROM Products").executeQuery();
+            if (rs.next()) {
+                assertEquals("product", rs.getString("name"));
+                assertEquals("product desc", rs.getString("desc"));
+                assertEquals(new BigDecimal("1.50"), rs.getBigDecimal("price"));
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);  
+        }
+    }
+
+    @Test //Given that a newly created staff is added to the users table, when addProductLog() method is called, then the product log with correct details should be in the ProductLogs table.
+    public void testAddProductLog() {
+        try {
+            int staffID = -1;
+            int productID = -1;
+            manager.addStaff("test1@mail.com", "test1", "Test1", "Test2", "0411111111");
+            ResultSet rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                staffID = rs.getInt(1);
+            }
+            manager.addProduct("product", "product desc", new BigDecimal(1.50));
+            rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                productID = rs.getInt(1);
+            }
+            manager.addProductLog(staffID, "2024-09-29 14:30:08", productID, "Changed X");
+            rs = conn.prepareStatement("SELECT * FROM productlogs").executeQuery();
+            if (rs.next()) {
+                assertEquals(staffID, rs.getInt("staff_id"));
+                assertEquals("2024-09-29 14:30:08", rs.getString("date"));
+                assertEquals(productID, rs.getInt("product_id"));
+                assertEquals("Changed X", rs.getString("desc"));
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+    }
+
+    @Test //Given that newly created staff, products and product logs are added to the database, when getProductLogs() method is called with filters, then an arraylist of filtered ProductLog objects should be returned with details corresponding to the created staff/product logs.
+    public void testGetProductLogsFiltered() {
+        try {
+            int staffID1 = -1, staffID2 = -1, staffID3 = -1, productID1 = -1, productID2 = -1, productID3 = -1;
+            manager.addStaff("test1@mail.com", "test1", "Test1", "Test2", "0411111111");
+            ResultSet rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                staffID1 = rs.getInt(1);
+            }
+            manager.addProduct("product1", "desc1", new BigDecimal("1.50"));
+            rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                productID1 = rs.getInt(1);
+            }
+            manager.addProductLog(staffID1, "2024-09-29 14:30:08", productID1, "Change X");
+            manager.addStaff("test2@mail.com", "test2", "Test3", "Test4", "0422222222");
+            rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                staffID2 = rs.getInt(1);
+            }
+            manager.addProduct("product2", "desc2", new BigDecimal("2.50"));
+            rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                productID2 = rs.getInt(1);
+            }
+            manager.addProductLog(staffID2,"2024-09-30 12:28:58", productID2, "Change Y");
+            manager.addStaff("test3@mail.com", "test3", "Test5", "Test6", "0433333333");
+            rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                staffID3 = rs.getInt(1);
+            }
+            manager.addProduct("product3", "desc3", new BigDecimal("2.00"));
+            rs = conn.prepareStatement("SELECT last_insert_id()").executeQuery();
+            if (rs.next()) {
+                productID3 = rs.getInt(1);
+            }
+            manager.addProductLog(staffID3,"2024-09-28 13:31:42", productID3,"Change X");
+            manager.addProductLog(staffID1, "2024-09-30 13:31:42", productID3, "Change X Change Y");
+            
+            ProductLogs productLogs = manager.getProductLogs("test1", "product3", "2024-09-29 12:28:58", "");
+            assertNotNull(productLogs.getProductLogs().get(0));
+            assertEquals(staffID1, productLogs.getProductLogs().get(0).getStaff().getID());
+            assertEquals("2024-09-30 13:31:42", productLogs.getProductLogs().get(0).getDate());
+            assertEquals(productID3, productLogs.getProductLogs().get(0).getProduct().getID());
+            assertEquals("Change X Change Y", productLogs.getProductLogs().get(0).getDesc());
         }
         catch (SQLException ex) {
             Logger.getLogger(DBManagerTest.class.getName()).log(Level.SEVERE, null, ex);   
