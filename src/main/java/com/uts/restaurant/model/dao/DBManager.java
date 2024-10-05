@@ -160,6 +160,12 @@ public class DBManager {
     }
 
     public Users getUsers(String emailFilter, String phoneNoFilter) throws SQLException {
+        if (emailFilter == null) {
+            emailFilter = "";
+        }
+        if (phoneNoFilter == null) {
+            phoneNoFilter = "";
+        }
         ArrayList<User> users = new ArrayList<User>();
         PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE email LIKE ? AND phoneno LIKE ? ORDER BY user_id");
         ps.setString(1, emailFilter + "%");

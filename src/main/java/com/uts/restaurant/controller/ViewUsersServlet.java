@@ -19,17 +19,11 @@ public class ViewUsersServlet extends HttpServlet{
         HttpSession session = request.getSession();
         String emailFilter = request.getParameter("emailFilter");
         String phoneNoFilter = request.getParameter("phoneNoFilter");
-        if (emailFilter == null && session.getAttribute("emailFilter") != null) {
+        if (emailFilter == null) {
             emailFilter = (String) session.getAttribute("emailFilter");
         }
-        else if (emailFilter == null) {
-            emailFilter = "";
-        }
-        if (phoneNoFilter == null && session.getAttribute("phoneNoFilter") != null) {
+        if (phoneNoFilter == null) {
             phoneNoFilter = (String) session.getAttribute("phoneNoFilter");
-        }
-        else if (phoneNoFilter == null) {
-            phoneNoFilter = "";
         }
         session.setAttribute("emailFilter", emailFilter);
         session.setAttribute("phoneNoFilter", phoneNoFilter);
@@ -50,18 +44,8 @@ public class ViewUsersServlet extends HttpServlet{
         HttpSession session = request.getSession();
         String emailFilter = request.getParameter("emailFilter");
         String phoneNoFilter = request.getParameter("phoneNoFilter");
-        if (emailFilter == null && session.getAttribute("emailFilter") != null) {
-            emailFilter = (String) session.getAttribute("emailFilter");
-        }
-        else if (emailFilter == null) {
-            emailFilter = "";
-        }
-        if (phoneNoFilter == null && session.getAttribute("phoneNoFilter") != null) {
-            phoneNoFilter = (String) session.getAttribute("phoneNoFilter");
-        }
-        else if (phoneNoFilter == null) {
-            phoneNoFilter = "";
-        }
+        emailFilter = (String) session.getAttribute("emailFilter");
+        phoneNoFilter = (String) session.getAttribute("phoneNoFilter");
         session.setAttribute("emailFilter", emailFilter);
         session.setAttribute("phoneNoFilter", phoneNoFilter);
         DBManager manager = (DBManager) session.getAttribute("manager");
