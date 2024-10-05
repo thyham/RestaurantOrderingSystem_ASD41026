@@ -38,9 +38,6 @@ public class ViewAccessLogsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String emailFilter = (String) session.getAttribute("emailFilter");
-        if (emailFilter == null) {
-            emailFilter = "";
-        }
         String fromDate = (String) session.getAttribute("fromDate");
         String toDate = (String) session.getAttribute("toDate");
         DBManager manager = (DBManager) session.getAttribute("manager");

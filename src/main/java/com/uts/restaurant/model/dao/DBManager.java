@@ -220,6 +220,9 @@ public class DBManager {
     }
 
     public AccessLogs getAccessLogs(String emailFilter, String fromDate, String toDate) throws SQLException {
+        if (emailFilter == null) {
+            emailFilter = "";
+        }
         if (fromDate == null || fromDate.isEmpty()) {
             fromDate = "2000-01-01 00:00:00";
         }
@@ -271,6 +274,12 @@ public class DBManager {
     }
 
     public ProductLogs getProductLogs(String emailFilter, String productFilter, String fromDate, String toDate) throws SQLException {
+        if (emailFilter == null) {
+            emailFilter = "";
+        }
+        if (productFilter == null) {
+            productFilter = "";
+        }
         if (fromDate == null || fromDate.isEmpty()) {
             fromDate = "2000-01-01 00:00:00";
         }
