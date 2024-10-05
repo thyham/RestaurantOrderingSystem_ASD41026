@@ -84,4 +84,12 @@
         <servlet-name>View-Access-Logs</servlet-name>
         <url-pattern>/view-access-logs</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>View-Product-Logs</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.ViewProductLogsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>View-Product-Logs</servlet-name>
+        <url-pattern>/view-product-logs</url-pattern>
+    </servlet-mapping>
 </web-app>

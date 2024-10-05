@@ -3,6 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    min-width: 1000px;
     background-color: #a2a8d3;
     font-family: "Roboto", sans-serif;
 }
@@ -19,6 +20,7 @@ h1 {
 
 header {
     display: flex;
+    flex-wrap: wrap;
     background-color: #142d4c;
     color: white;
     align-items: center;
@@ -69,7 +71,8 @@ a:active.active {
 .content {
     display: flex;
     flex-direction: column;
-    margin: 10em 15em 5em 15em;
+    flex-wrap: wrap;
+    margin: 10em 15vw 5em 15vw;
     padding: 2%;
     border: 3px solid white;
     background-color: #f1f1f1;
@@ -230,6 +233,7 @@ th {
 
 .search {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 40px;
     padding: 0 0 20px 0;
