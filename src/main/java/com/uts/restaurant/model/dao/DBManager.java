@@ -3,6 +3,8 @@ package com.uts.restaurant.model.dao;
 import com.uts.restaurant.model.AccessLog;
 import com.uts.restaurant.model.AccessLogs;
 import com.uts.restaurant.model.Customer;
+import com.uts.restaurant.model.Order;
+import com.uts.restaurant.model.Orders;
 import com.uts.restaurant.model.Product;
 import com.uts.restaurant.model.ProductLog;
 import com.uts.restaurant.model.ProductLogs;
@@ -310,5 +312,38 @@ public class DBManager {
             
         }
         return new ProductLogs(productLogs);
+    }
+
+    public Orders getOrders(String emailFilter, String fromDate, String toDate) throws SQLException {
+        if (emailFilter == null) {
+            emailFilter = "";
+        }
+        if (fromDate == null || fromDate.isEmpty()) {
+            fromDate = "2000-01-01 00:00:00";
+        }
+        if (toDate == null || toDate.isEmpty()) {
+            toDate = "3000-01-01 23:59:59";
+        }
+        ArrayList<Order> orders = new ArrayList<Order>();
+        PreparedStatement ps = conn.prepareStatement(
+        "SELECT orders.order_id, orders.customer_id, users.email, orders.`date`, orders.receipt_no, orders.payment_type " +
+        "FROM orders " +
+            "INNER JOIN users ON orders.customer_id=users.user_id " +
+            "WHERE users.email LIKE ? AND ? <= date AND date <= ? " +
+            "ORDER BY order_id");
+        ps.setString(1, emailFilter + "%");
+        ps.setString(2, fromDate);
+        ps.setString(3, toDate);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int orderID = rs.getInt("order_id");
+            int customerID = rs.getInt("customer_id");
+            String email = rs.getString("email");
+            String date = rs.getString("date");
+            int receiptNo = rs.getInt("receipt_no");
+            String paymentType = rs.getString("payment_type");
+            orders.add(new Order(orderID, new Customer(customerID, email), date, receiptNo, paymentType));
+        }
+        return new Orders(orders);
     }
 }
