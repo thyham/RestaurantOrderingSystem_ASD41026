@@ -42,10 +42,8 @@ public class ViewUsersServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String emailFilter = request.getParameter("emailFilter");
-        String phoneNoFilter = request.getParameter("phoneNoFilter");
-        emailFilter = (String) session.getAttribute("emailFilter");
-        phoneNoFilter = (String) session.getAttribute("phoneNoFilter");
+        String emailFilter = (String) session.getAttribute("emailFilter");
+        String phoneNoFilter = (String) session.getAttribute("phoneNoFilter");
         session.setAttribute("emailFilter", emailFilter);
         session.setAttribute("phoneNoFilter", phoneNoFilter);
         DBManager manager = (DBManager) session.getAttribute("manager");

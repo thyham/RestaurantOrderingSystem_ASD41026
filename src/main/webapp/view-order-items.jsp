@@ -41,7 +41,7 @@
         </div>
         <div>
             <form action="view-order-items", method="post" class="search">
-                <input type="text" id="productFilter" name="productFilter" value="<%= (productFilter != null ? productFilter: "")%>" placeholder="Filter by product...">
+                <input type="text" id="productFilter" name="productFilter" value="<%= (productFilter != null ? productFilter: "")%>" placeholder="Filter by product name...">
                 <button type="submit">Search</button>
             </form>
             <table id="center">

@@ -24,7 +24,7 @@ public class ViewOrderItemsServlet extends HttpServlet {
             orderID = (int) session.getAttribute("orderID");
         }
         String productFilter = request.getParameter("productFilter");
-        session.setAttribute("emailFilter", productFilter);
+        session.setAttribute("productFilter", productFilter);
         session.setAttribute("orderID", orderID);
         DBManager manager = (DBManager) session.getAttribute("manager");
         OrderItems orderItems = null;

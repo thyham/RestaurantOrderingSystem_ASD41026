@@ -51,4 +51,5 @@ public class ViewOrdersServlet extends HttpServlet {
         session.setAttribute("orders", orders);
         request.getRequestDispatcher("view-orders.jsp").include(request, response);
     }
+
 }
