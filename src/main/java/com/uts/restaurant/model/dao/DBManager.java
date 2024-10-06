@@ -5,6 +5,8 @@ import com.uts.restaurant.model.AccessLogs;
 import com.uts.restaurant.model.Customer;
 import com.uts.restaurant.model.Order;
 import com.uts.restaurant.model.Orders;
+import com.uts.restaurant.model.OrderItem;
+import com.uts.restaurant.model.OrderItems;
 import com.uts.restaurant.model.Product;
 import com.uts.restaurant.model.ProductLog;
 import com.uts.restaurant.model.ProductLogs;
@@ -345,5 +347,29 @@ public class DBManager {
             orders.add(new Order(orderID, new Customer(customerID, email), date, receiptNo, paymentType));
         }
         return new Orders(orders);
+    }
+
+    public OrderItems getOrderItems(int orderID, String productFilter) throws SQLException {
+        if (productFilter == null) {
+            productFilter = "";
+        }
+        ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+        PreparedStatement ps = conn.prepareStatement(
+        "SELECT orderitems.product_id, products.`name`, orderitems.customisation, orderitems.quantity " +
+        "FROM orderitems " +
+            "INNER JOIN products ON orderitems.product_id=products.product_id " +
+            "WHERE order_id LIKE ? AND products.`name` LIKE ? " +
+            "ORDER BY product_id");
+        ps.setInt(1, orderID);
+        ps.setString(2, productFilter + "%");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int productID = rs.getInt("product_id");
+            String productName = rs.getString("name");
+            String customisation = rs.getString("customisation");
+            int quantity = rs.getInt("quantity");
+            orderItems.add(new OrderItem(new Product(productID, productName), customisation, quantity));
+        }
+        return new OrderItems(orderItems);
     }
 }

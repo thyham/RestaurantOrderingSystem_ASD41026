@@ -77,9 +77,10 @@
                     <td><%= date%></td>
                     <td><%= receiptNo%></td>
                     <td><%= paymentType%></td>
-                    <form action="", method="post">
+                    <form action="view-order-items", method="post">
                         <input type="hidden" name="orderID" value="<%= orderID%>">
-                        <td><button>View</button></td>
+                        <input type="hidden" name="email" value="<%= email%>">
+                        <td><button type="submit">View</button></td>
                     </form>
                 </tr>
                 <% i++; }%>

@@ -3,24 +3,30 @@ package com.uts.restaurant.model;
 import java.io.Serializable;
 
 public class OrderItem implements Serializable {
-    int orderID;
-    int productID;
+    Order order;
+    Product product;
     String customisation;
     int quantity;
 
-    public OrderItem(int orderID, int productID, String customisation, int quantity) {
-        this.orderID = orderID;
-        this.productID = productID;
+    public OrderItem(Order order, Product product, String customisation, int quantity) {
+        this.order = order;
+        this.product = product;
         this.customisation = customisation;
         this.quantity = quantity;
     }
 
-    public int getOrderID() {
-        return orderID;
+    public OrderItem(Product product, String customisation, int quantity) {
+        this.product = product;
+        this.customisation = customisation;
+        this.quantity = quantity;
     }
 
-    public int getProductID() {
-        return productID;
+    public Order getOrder() {
+        return order;
+    }
+
+    public Product getProduct() {
+        return product;
     }
     
     public String getCustomisation() {
