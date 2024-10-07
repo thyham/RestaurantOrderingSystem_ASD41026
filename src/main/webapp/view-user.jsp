@@ -9,7 +9,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        <title>Restaurant | Home</title>
+        <title>Restaurant | View User</title>
         <link rel="stylesheet" href="styles.css">
     </head>
 

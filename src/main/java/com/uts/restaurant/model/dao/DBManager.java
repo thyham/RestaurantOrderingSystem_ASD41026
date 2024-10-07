@@ -3,6 +3,10 @@ package com.uts.restaurant.model.dao;
 import com.uts.restaurant.model.AccessLog;
 import com.uts.restaurant.model.AccessLogs;
 import com.uts.restaurant.model.Customer;
+import com.uts.restaurant.model.Order;
+import com.uts.restaurant.model.Orders;
+import com.uts.restaurant.model.OrderItem;
+import com.uts.restaurant.model.OrderItems;
 import com.uts.restaurant.model.Product;
 import com.uts.restaurant.model.ProductLog;
 import com.uts.restaurant.model.ProductLogs;
@@ -160,6 +164,12 @@ public class DBManager {
     }
 
     public Users getUsers(String emailFilter, String phoneNoFilter) throws SQLException {
+        if (emailFilter == null) {
+            emailFilter = "";
+        }
+        if (phoneNoFilter == null) {
+            phoneNoFilter = "";
+        }
         ArrayList<User> users = new ArrayList<User>();
         PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE email LIKE ? AND phoneno LIKE ? ORDER BY user_id");
         ps.setString(1, emailFilter + "%");
@@ -214,6 +224,9 @@ public class DBManager {
     }
 
     public AccessLogs getAccessLogs(String emailFilter, String fromDate, String toDate) throws SQLException {
+        if (emailFilter == null) {
+            emailFilter = "";
+        }
         if (fromDate == null || fromDate.isEmpty()) {
             fromDate = "2000-01-01 00:00:00";
         }
@@ -265,6 +278,12 @@ public class DBManager {
     }
 
     public ProductLogs getProductLogs(String emailFilter, String productFilter, String fromDate, String toDate) throws SQLException {
+        if (emailFilter == null) {
+            emailFilter = "";
+        }
+        if (productFilter == null) {
+            productFilter = "";
+        }
         if (fromDate == null || fromDate.isEmpty()) {
             fromDate = "2000-01-01 00:00:00";
         }
@@ -295,5 +314,62 @@ public class DBManager {
             
         }
         return new ProductLogs(productLogs);
+    }
+
+    public Orders getOrders(String emailFilter, String fromDate, String toDate) throws SQLException {
+        if (emailFilter == null) {
+            emailFilter = "";
+        }
+        if (fromDate == null || fromDate.isEmpty()) {
+            fromDate = "2000-01-01 00:00:00";
+        }
+        if (toDate == null || toDate.isEmpty()) {
+            toDate = "3000-01-01 23:59:59";
+        }
+        ArrayList<Order> orders = new ArrayList<Order>();
+        PreparedStatement ps = conn.prepareStatement(
+        "SELECT orders.order_id, orders.customer_id, users.email, orders.`date`, orders.receipt_no, orders.payment_type " +
+        "FROM orders " +
+            "INNER JOIN users ON orders.customer_id=users.user_id " +
+            "WHERE users.email LIKE ? AND ? <= date AND date <= ? " +
+            "ORDER BY order_id");
+        ps.setString(1, emailFilter + "%");
+        ps.setString(2, fromDate);
+        ps.setString(3, toDate);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int orderID = rs.getInt("order_id");
+            int customerID = rs.getInt("customer_id");
+            String email = rs.getString("email");
+            String date = rs.getString("date");
+            int receiptNo = rs.getInt("receipt_no");
+            String paymentType = rs.getString("payment_type");
+            orders.add(new Order(orderID, new Customer(customerID, email), date, receiptNo, paymentType));
+        }
+        return new Orders(orders);
+    }
+
+    public OrderItems getOrderItems(int orderID, String productFilter) throws SQLException {
+        if (productFilter == null) {
+            productFilter = "";
+        }
+        ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+        PreparedStatement ps = conn.prepareStatement(
+        "SELECT orderitems.product_id, products.`name`, orderitems.customisation, orderitems.quantity " +
+        "FROM orderitems " +
+            "INNER JOIN products ON orderitems.product_id=products.product_id " +
+            "WHERE order_id LIKE ? AND products.`name` LIKE ? " +
+            "ORDER BY product_id");
+        ps.setInt(1, orderID);
+        ps.setString(2, productFilter + "%");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int productID = rs.getInt("product_id");
+            String productName = rs.getString("name");
+            String customisation = rs.getString("customisation");
+            int quantity = rs.getInt("quantity");
+            orderItems.add(new OrderItem(new Product(productID, productName), customisation, quantity));
+        }
+        return new OrderItems(orderItems);
     }
 }

@@ -30,7 +30,7 @@
                     <li><a href="view-users">View Users</a></li>
                     <li><a href="view-access-logs">View Access Logs</a></li>
                     <li><a href="view-product-logs">View Product Logs</a></li>
-                    <li><a href=".">View Order Logs</a></li>
+                    <li><a href="view-orders">View Orders</a></li>
                 </ul>
             </div>
             <a href="logout" class="logoutbtn">Logout</a>

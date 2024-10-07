@@ -3,9 +3,9 @@ package com.uts.restaurant.model;
 import java.io.Serializable;
 
 public class AccessLog implements Serializable {
-    public User user;
-    public String date;
-    public String desc;
+    User user;
+    String date;
+    String desc;
 
     public AccessLog(User user, String date, String desc) {
         this.user = user;

@@ -1,9 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-<%@page import="com.uts.restaurant.model.ProductLogs"%>
-<%@page import="com.uts.restaurant.model.ProductLog"%>
-<%@page import="com.uts.restaurant.model.Product"%>
-<%@page import="com.uts.restaurant.model.Staff"%>
+<%@page import="com.uts.restaurant.model.Order"%>
+<%@page import="com.uts.restaurant.model.Orders"%>
+<%@page import="com.uts.restaurant.model.Customer"%>
 <%@page import="java.io.IOException"%>
 
 
@@ -13,16 +12,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Restaurant | View Product Logs</title>
+    <title>Restaurant | View Orders</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
     <%
-        ProductLogs productLogs = (ProductLogs) request.getSession().getAttribute("productLogs");
+        Orders orders = (Orders) request.getSession().getAttribute("orders");
         String emailFilter = (String) session.getAttribute("emailFilter");
-        String productFilter = (String) session.getAttribute("productFilter");
         String fromDate = (String)request.getSession().getAttribute("fromDate");
         String toDate = (String)request.getSession().getAttribute("toDate");
     %>
@@ -41,12 +39,11 @@
 
     <div class="content">
         <div>
-            <h1>Viewing Product Logs</h1>
+            <h1>Viewing Orders</h1>
         </div>
         <div>
-            <form action="view-product-logs", method="post" class="search">
+            <form action="view-orders", method="post" class="search">
                 <input type="text" id="emailFilter" name="emailFilter" value="<%= (emailFilter != null ? emailFilter : "")%>" placeholder="Filter by email...">
-                <input type="text" id="productFilter" name="productFilter" value="<%= (productFilter != null ? productFilter : "")%>" placeholder="Filter by product name...">
                 <label for="fromDate">From:</label>
                 <input type="datetime-local" name="fromDate" value="<%= fromDate%>">
                 <label for="toDate">To:</label>
@@ -55,32 +52,36 @@
             </form>
             <table id="center">
                 <tr>
-                    <th>Staff ID</th>
-                    <th>Staff Email</th>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
+                    <th>Order ID</th>
+                    <th>Customer ID</th>
+                    <th>Customer Email</th>
                     <th>Date</th>
-                    <th>Description</th>
+                    <th>Receipt Number</th>
+                    <th>Payment Type</th>
+                    <th></th>
                 </tr>
                 <% 
                     int i = 0;
-                    for (ProductLog productLog : productLogs.getProductLogs()) {
-                        Staff staff = productLog.getStaff();
-                        int staffID = staff.getID();
-                        String email = staff.getEmail();
-                        String date = productLog.getDate();
-                        String desc = productLog.getDesc();
-                        Product product = productLog.getProduct();
-                        int productID = product.getID();
-                        String productName = product.getName();
+                    for (Order order : orders.getOrders()) {
+                        int orderID = order.getID();
+                        int customerID = order.getCustomer().getID();
+                        String email = order.getCustomer().getEmail();
+                        String date = order.getDate();
+                        int receiptNo = order.getReceiptNo();
+                        String paymentType = order.getPaymentType();
                 %>
                 <tr>
-                    <td><%= staffID%></td>
+                    <td><%= orderID%></td>
+                    <td><%= customerID%></td>
                     <td><%= email%></td>
-                    <td><%= productID%></td>
-                    <td><%= productName%></td>
                     <td><%= date%></td>
-                    <td><%= desc%></td>
+                    <td><%= receiptNo%></td>
+                    <td><%= paymentType%></td>
+                    <form action="view-order-items", method="post">
+                        <input type="hidden" name="orderID" value="<%= orderID%>">
+                        <input type="hidden" name="email" value="<%= email%>">
+                        <td><button type="submit">View</button></td>
+                    </form>
                 </tr>
                 <% i++; }%>
             </table>
@@ -98,3 +99,5 @@
         <p>By Group 6 | University of Technology | Spring 2024</p>
     </footer>
 </body>
+
+</html>

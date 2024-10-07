@@ -3,10 +3,10 @@ package com.uts.restaurant.model;
 import java.io.Serializable;
 
 public class ProductLog implements Serializable {
-    public Staff staff;
-    public String date;
-    public Product product;
-    public String desc;
+    Staff staff;
+    String date;
+    Product product;
+    String desc;
 
     public ProductLog(Staff staff, String date, Product product, String desc) {
         this.staff = staff;

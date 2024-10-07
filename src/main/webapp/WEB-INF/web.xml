@@ -92,4 +92,20 @@
         <servlet-name>View-Product-Logs</servlet-name>
         <url-pattern>/view-product-logs</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>View-Orders</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.ViewOrdersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>View-Orders</servlet-name>
+        <url-pattern>/view-orders</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>View-Order-Items</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.ViewOrderItemsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>View-Order-Items</servlet-name>
+        <url-pattern>/view-order-items</url-pattern>
+    </servlet-mapping>
 </web-app>
