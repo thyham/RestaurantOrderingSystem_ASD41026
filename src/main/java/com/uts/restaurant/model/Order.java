@@ -1,38 +1,40 @@
 package com.uts.restaurant.model;
 
-public class Order {
-    private String productName;
-    private String customisationRequest;
-    private int quantity;
+import java.io.Serializable;
 
-    public Order(String productName, String customisationRequest, int quantity) {
-        this.productName = productName;
-        this.customisationRequest = customisationRequest;
-        this.quantity = quantity;
+public class Order implements Serializable {
+    int id;
+    Customer customer;
+    String date;
+    int receiptNo;
+    String paymentType;
+
+    public Order(int id, Customer customer, String date, int receiptNo, String payementType) {
+        this.id = id;
+        this.customer = customer;
+        this.date = date;
+        this.receiptNo = receiptNo;
+        this.paymentType = payementType;
     }
 
-    public String getProductName() {
-        return productName;
+    public int getID() {
+        return id;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public String getCustomisationRequest() {
-        return customisationRequest;
+    public String getDate() {
+        return date;
     }
 
-    public void setCustomisationRequest(String customisationRequest) {
-        this.customisationRequest = customisationRequest;
+    public int getReceiptNo() {
+        return receiptNo;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public String getPaymentType() {
+        return paymentType;
     }
 
 }

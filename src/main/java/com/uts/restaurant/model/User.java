@@ -18,21 +18,10 @@ public class User implements Serializable {
         this.phoneNo = phoneNo;
         this.isActive = isActive;
     }
-    
-    public User(String fname, String surname, String email, String phoneNo, Boolean isActive) {
-        this.fname = fname;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNo = phoneNo;
-        this.isActive = isActive;
-    }
 
-    public User(String fname, String surname, String email, String phoneNo) {
-        this.fname = fname;
-        this.surname = surname;
+    public User(int id, String email) {
+        this.id = id;
         this.email = email;
-        this.phoneNo = phoneNo;
-        isActive = true;
     }
 
     public User(String email) {

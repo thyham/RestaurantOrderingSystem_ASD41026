@@ -1,9 +1,11 @@
+use restaurant;
+
 DROP TABLE IF EXISTS `Staff`;
 
 CREATE TABLE `Staff` (
   `staff_id` int NOT NULL,
   PRIMARY KEY (`staff_id`),
-  CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+  CONSTRAINT `fk__Staff__Users` FOREIGN KEY (`staff_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `Staff` WRITE;

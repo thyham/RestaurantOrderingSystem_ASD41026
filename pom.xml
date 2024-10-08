@@ -11,9 +11,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jakartaee>9.0.0</jakartaee>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <jakartaee>10.0.0</jakartaee>
   </properties>
 
   <dependencies>

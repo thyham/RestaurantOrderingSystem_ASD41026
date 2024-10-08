@@ -15,7 +15,7 @@
 
 		<header>
 			<div>
-				<img src="" alt="Logo">
+				<img src="placeholderimage.webp" alt="Logo" height="80px" width="80px">
 			</div>
 			<ul>
 				<li><a class="active" href="homedirect.jsp">Home</a></li>
@@ -27,7 +27,7 @@
 
 		<div class="content">
 			<h1>Welcome to the Restaurant Online Ordering System!</h1>
-			<img src="" alt="Food" style="width:50vw;height:50vh;">
+			<img src="food1.jpg" alt="Food" style="width:80%;height:80%;">
 			<div class="dashboard">
 				<ul>
 					<li><a href="login.jsp">Login</a></li>

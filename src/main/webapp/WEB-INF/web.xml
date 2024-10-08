@@ -31,7 +31,7 @@
     <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>com.uts.restaurant.controller.LogoutServlet</servlet-class>
-     </servlet>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
@@ -39,7 +39,7 @@
     <servlet>
         <servlet-name>View-Users</servlet-name>
         <servlet-class>com.uts.restaurant.controller.ViewUsersServlet</servlet-class>
-     </servlet>
+    </servlet>
     <servlet-mapping>
         <servlet-name>View-Users</servlet-name>
         <url-pattern>/view-users</url-pattern>
@@ -47,9 +47,65 @@
     <servlet>
         <servlet-name>View-User</servlet-name>
         <servlet-class>com.uts.restaurant.controller.ViewUserServlet</servlet-class>
-     </servlet>
+    </servlet>
     <servlet-mapping>
         <servlet-name>View-User</servlet-name>
         <url-pattern>/view-user</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Update-User</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.UpdateUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Update-User</servlet-name>
+        <url-pattern>/update-user</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Add-User</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.AddUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Add-User</servlet-name>
+        <url-pattern>/add-user</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Delete-User</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.DeleteUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Delete-User</servlet-name>
+        <url-pattern>/delete-user</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>View-Access-Logs</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.ViewAccessLogsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>View-Access-Logs</servlet-name>
+        <url-pattern>/view-access-logs</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>View-Product-Logs</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.ViewProductLogsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>View-Product-Logs</servlet-name>
+        <url-pattern>/view-product-logs</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>View-Orders</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.ViewOrdersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>View-Orders</servlet-name>
+        <url-pattern>/view-orders</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>View-Order-Items</servlet-name>
+        <servlet-class>com.uts.restaurant.controller.ViewOrderItemsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>View-Order-Items</servlet-name>
+        <url-pattern>/view-order-items</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -9,7 +9,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        <title>Restaurant | Home</title>
+        <title>Restaurant | View User</title>
         <link rel="stylesheet" href="styles.css">
     </head>
 
@@ -26,10 +26,8 @@
             String emailErr = (String) session.getAttribute("emailErr");
             String fnameErr = (String) session.getAttribute("fnameErr");
             String surnameErr = (String) session.getAttribute("surnameErr");
-            String passwordErr = (String) session.getAttribute("passwordErr");
             String phoneErr = (String) session.getAttribute("phoneErr");
             session.setAttribute("emailErr", "");
-            session.setAttribute("passwordErr", "");
             session.setAttribute("fnameErr", "");
             session.setAttribute("surnameErr", "");
             session.setAttribute("phoneErr", "");
@@ -37,7 +35,7 @@
 
         <header>
             <div>
-                <img src="" alt="Logo">
+                <img src="placeholderimage.webp" alt="Logo" height="80px" width="80px">
             </div>
             <ul>
                 <li><a href="homedirect.jsp">Home</a></li>
@@ -48,35 +46,49 @@
         </header>
 
         <div id="center">
-            <form action="login" , method="post" class="content">
-                <h1>Viewing Name</h1>
+            <form action="update-user" , method="post" class="content">
+                <h1>Viewing <%= fname%> <%= surname%>'s Profile</h1>
                 <table>
                     <div class="profile">
                         <tr>
-                            <td><b>Id:</b></td>
-                            <td><%= id%></td>
+                            <td><b>Id</b></td>
+                            <td><%= id%> <input name="id" type="hidden" value="<%= id%>"></td>
                         </tr>
                         <tr>
-                            <td><b>User Type:</b></td>
+                            <td><b>User Type</b></td>
                             <td><%= type%></td>
                         </tr>
                         <tr>
                             <td><label for="fname"><b>First Name</b></label></td>
                             <td><input type="text" name="fname" value="<%= fname%>" required>
-
+                                <% if (fnameErr != null) { %>
+                                    <br><div style="color: red;"><%= fnameErr%></div>
+                                <% } %>
                             </td>
                         </tr>
                         <tr>
                             <td><label for="surname"><b>Surname</b></label></td>
                             <td><input type="text" name="surname" value="<%= surname%>" required>
+                                <% if (surnameErr != null) { %>
+                                    <br><div style="color: red;"><%= surnameErr%></div>
+                                <% } %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="email"><b>Email</b></label></td>
+                            <td><input type="text" name="email" value="<%= email%>" required>
+                                <% if (emailErr != null) { %>
+                                    <br><div style="color: red;"><%= emailErr%></div>
+                                <% } %>
+                            </td>
                         </tr>
                         <tr>
                             <td><label for="phoneNo"><b>Phone Number</b></label></td>
                             <td><input type="text" name="phoneNo" value="<%= phoneNo%>" required>
-                        </tr>
-                        <tr>
-                            <td><label for="email"><b>Email</b></label></td>
-                            <td><input type="text" name="email" value="<%= email%>" required></td>
+                                <% if (phoneErr != null) { %>
+                                    <br><div style="color: red;"><%= phoneErr%></div>
+                                <% } %>
+                            </td>
                         </tr>
                         <tr>
                             <td><label for="status"><b>User Status:</b></label></td>
